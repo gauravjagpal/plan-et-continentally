@@ -7,6 +7,7 @@ import appStyles from "../../App.module.css";
 
 import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
 import axios from "axios";
+import SignUpPic from "../../assets/signUpForm.jpg"
 
 const SignUpForm = () => {
     const [signUpData, setSignUpData] = useState({
@@ -94,9 +95,7 @@ const SignUpForm = () => {
             >
                 <Image
                     className={`${appStyles.FillerImage}`}
-                    src={
-                        "https://etimg.etb2bimg.com/thumb/msid-102797545,imgsize-83808,width-1200,height=765,overlay-ettravel/tourism/experiential/travel-insights-from-skyscanner-indian-travellers-embrace-budget-friendly-explorations-immersive-journeys.jpg"
-                    }
+                    src={SignUpPic}
                 />
             </Col>
         </Row>
