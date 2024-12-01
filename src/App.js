@@ -28,8 +28,8 @@ function App() {
             <PostsPage message="No results. Adjust Search Criteria or Follow A User."
               filter={`owner__followed__owner__profile=${profile_id}&`} />} />
           <Route exact path="/favourites" render={() =>
-            <PostsPage message="No results. Adjust Search Criteria or Like a Post."
-              filter={`owner__followed__owner__profile=${profile_id}&`} />} />
+            <PostsPage message="No results. Adjust Search Criteria or Favourite a Post."
+            filter={`favourites__owner__profile=${profile_id}&ordering=-favourites__created_at&`} />} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
