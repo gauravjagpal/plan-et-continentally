@@ -22,3 +22,10 @@
   .HeartOutline:hover {
     color: #f85032;
   }
+
+  .Country {
+    font-size: 14px;
+    color: #6c757d;  /* Adjust the color as per your design */
+    text-align: center;
+    margin-top: 10px;
+}

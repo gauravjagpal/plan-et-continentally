@@ -4,14 +4,14 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext'
 import { Card, Media, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
-import axios from 'axios';
 import { axiosRes } from '../../api/axiosDefaults';
 
 const Post = (props) => {
     const {
         id, owner, profile_id, profile_image,
         comments_count, favourite_id, favourites_count, title,
-        content, image, updated_at, postPage, setPosts
+        content, image, updated_at, postPage, setPosts,
+        country
     } = props
 
     const currentUser = useCurrentUser();
@@ -19,15 +19,19 @@ const Post = (props) => {
 
     const handleFavourite = async () => {
         try {
-            const { data } = await axiosRes.post('/favourites/', { post: id })
+            const { data } = await axiosRes.post('/favourites/', { post: id });
             setPosts((prevPosts) => ({
                 ...prevPosts,
                 results: prevPosts.results.map((post) => {
                     return post.id === id
-                        ? { ...post, favourites_count: post.favourites_count + 1, favourite_id: data.id }
+                        ? {
+                            ...post,
+                            favourites_count: (Number(post.favourites_count) || 0) + 1,  // Ensure it's a number
+                            favourite_id: data.id,
+                        }
                         : post;
                 })
-            }));
+            }))
         } catch (err) {
             console.log(err);
         }
@@ -55,6 +59,7 @@ const Post = (props) => {
                 <Media className='align-items-center justify-content-between' >
                     <Link to={`/profiles/${profile_id}`} >
                         <Avatar src={profile_image} height={55} />
+                        {owner}
                     </Link>
                     <div className='d-flex align-items-center'>
                         <span>{updated_at}</span>
@@ -66,6 +71,7 @@ const Post = (props) => {
                 <Card.Img src={image} alt={title} />
             </Link>
             <Card.Body>
+                {country && <Card.Text className={styles.Country}>Trip to: {country}</Card.Text>}
                 {title && <Card.Title className='text-center'>{title}</Card.Title>}
                 {content && <Card.Text>{content}</Card.Text>}
                 <div className={styles.PostBar}>
@@ -86,7 +92,7 @@ const Post = (props) => {
                             <i className='far fa-heart' />
                         </OverlayTrigger>
                     )}
-                    {favourites_count}
+                    {isNaN(favourites_count) ? 0 : favourites_count}
                     <Link to={`/posts/${id}`}>
                         <i className='far fa-comments' />
                     </Link>
