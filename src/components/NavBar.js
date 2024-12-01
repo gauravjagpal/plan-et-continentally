@@ -31,7 +31,10 @@ const NavBar = () => {
         <NavLink exact to="/feed" className={styles.NavLink} activeClassName={styles.Active}><i className='fas fa-stream'></i>Feed</NavLink>
         <NavLink exact to="/favourites" className={styles.NavLink} activeClassName={styles.Active}><i className='fas fa-heart'></i>Favourites</NavLink>
         <NavLink exact to="/" className={styles.NavLink} onClick={handleSignOut}><i className='fas fa-sign-out-alt'></i>Sign Out</NavLink>
-        <NavLink exact to={`/profiles/${currentUser?.profile_id}`} className={styles.NavLink}><Avatar src={currentUser?.profile_image} text="Profile" height={40} /></NavLink>
+        <NavLink exact to={`/profiles/${currentUser?.profile_id}`} className={styles.NavLink}>
+            <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+            <span className={styles.Username}>{currentUser?.username}</span>
+        </NavLink>
         
         
     </>
