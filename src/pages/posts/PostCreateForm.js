@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -26,11 +26,30 @@ function PostCreateForm() {
         title: "",
         content: "",
         image: "",
+        country: ''
     });
-    const { title, content, image } = postData;
+
+    const [countries, setCountries] = useState([]); // State to store countries
+    const { title, content, image, country } = postData;
+
 
     const imageInput = useRef(null);
     const history = useHistory();
+
+    // Fetch countries from API on component mount
+
+    useEffect(() => {
+
+        const fetchCountries = async () => {
+            try {
+                const response = await axiosReq.get("https://restcountries.com/v3.1/all"); // Example API URL
+                setCountries(response.data);
+            } catch (error) {
+                console.error("Error fetching countries:", error);
+            }
+        };
+        fetchCountries();
+    }, []);
 
     const handleChange = (event) => {
         setPostData({
@@ -55,6 +74,7 @@ function PostCreateForm() {
 
         formData.append("title", title);
         formData.append("content", content);
+        formData.append("country", country);
         formData.append("image", imageInput.current.files[0]);
 
         try {
@@ -82,7 +102,19 @@ function PostCreateForm() {
             ))}
 
             <Form.Group>
-                <Form.Label >Content</Form.Label>
+                <Form.Label>Country</Form.Label>
+                <Form.Control as="select" name="country" value={country} onChange={handleChange}>
+                    <option value="">Select a country</option>
+                    {countries.map((country, idx) => (
+                        <option key={idx} value={country.cca2}>
+                            {country.name.common}
+                        </option>
+                    ))}
+                </Form.Control>
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Content</Form.Label>
                 <Form.Control as="textarea" name="content" rows={6} value={content} onChange={handleChange} />
             </Form.Group>
             {errors?.content?.map((message, idx) => (
@@ -95,10 +127,10 @@ function PostCreateForm() {
                 className={`${btnStyles.Button} ${btnStyles.Blue}`}
                 onClick={() => history.goBack()}
             >
-                cancel
+                Cancel
             </Button>
             <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-                create
+                Create
             </Button>
         </div>
     );
@@ -130,7 +162,6 @@ function PostCreateForm() {
                                     <Asset src={Upload} message="Click to upload an image" />
                                 </Form.Label>
                             )}
-
 
                             <Form.File id="image-upload" accept="image/*" onChange={handleChangeImage} ref={imageInput} />
 
