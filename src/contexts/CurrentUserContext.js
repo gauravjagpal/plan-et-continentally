@@ -31,7 +31,7 @@ export const CurrentUserProvider = ({ children }) => {
         axiosReq.interceptors.request.use(
             async (config) => {
                 try {
-                    await axios.post('/dj-rest-auth/to')
+                    await axios.post('/dj-rest-auth/token/resfresh/')
                 } catch(err){
                     setCurrentUser((prevCurrentUser) => {
                         if (prevCurrentUser) {
