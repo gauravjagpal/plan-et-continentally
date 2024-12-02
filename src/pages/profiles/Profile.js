@@ -22,16 +22,18 @@ const Profile = (props) => {
                 </Link>
             </div>
             <div className={`mx-2 ${styles.WordBreak}`}>
-                <strong>{owner}</strong>
+                <Link className='align-self-center' to={`/profiles/${id}`}>
+                    <strong>{owner}</strong>
+                </Link>
             </div>
             <div className={`text-right ${!mobile && 'ml-auto'}`}>
                 {!mobile && currentUser && !is_owner && (
                     following_id ? (
-                        <Button className={`${btnStyles.Button} ${btnStyles.BlackOutline}`} onClick={() => {}} >
+                        <Button className={`${btnStyles.Button} ${btnStyles.BlackOutline}`} onClick={() => { }} >
                             Unfollow
                         </Button>
                     ) : (
-                        <Button className={`${btnStyles.Button} ${btnStyles.Black}`} onClick={() => {}}>Follow</Button>
+                        <Button className={`${btnStyles.Button} ${btnStyles.Black}`} onClick={() => { }}>Follow</Button>
                     )
                 )}
             </div>
