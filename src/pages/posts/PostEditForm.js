@@ -123,7 +123,7 @@ function PostEditForm() {
                 <Form.Control as="select" name="country" value={country} onChange={handleChange}>
                     <option value="">Select a country</option>
                     {countries.map((country, idx) => (
-                        <option key={idx} value={country.cca2}>
+                        <option key={idx} value={country.code}>
                             {country.name.common}
                         </option>
                     ))}
