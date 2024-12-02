@@ -6,6 +6,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext'
 import Asset from '../../components/Asset'
 import Profile from './Profile'
 
+
 const PopularProfiles = ({ mobile }) => {
   const [profileData, setProfileData] = useState({
     //
