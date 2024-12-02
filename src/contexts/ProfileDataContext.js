@@ -54,7 +54,7 @@ export const ProfileDataProvider = ({ children }) => {
 
         setProfileData( (prevState) => ({
           ...prevState,
-          PopularProfiles: {
+          pageProfile: {
             results: prevState.pageProfile.results.map((profile) => 
               unfollowHelper(profile, clickedProfile)),
           },
