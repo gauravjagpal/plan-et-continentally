@@ -38,8 +38,6 @@ function PostCreateForm() {
     const imageInput = useRef(null);
     const history = useHistory();
 
-    // Fetch countries from API on component mount
-
     useEffect(() => {
 
         const fetchCountries = async () => {
@@ -183,8 +181,8 @@ function PostCreateForm() {
 
                         </Form.Group>
                         {errors?.image?.map((message, idx) => (
-                            <Alert variant="warning" key={idx}>
-                                {message}
+                            <Alert variant="warning" key={idx} className="text-center" >
+                                An image must be uploaded
                             </Alert>
                         ))}
 

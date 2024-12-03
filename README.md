@@ -1,4 +1,28 @@
-# Getting Started with Create React App
+# Plan-et Continentally
+
+### Am I responsive
+![Am I responsive](documentation/images/responsive.png)
+
+Portfolio 5 project as part of the Diploma in Full Stack Software Development by Code Institute. This project uses:
+- HTML, CSS, JavaScript
+- React.js
+- Bootstrap.js
+- Django REST Framework
+
+___
+
+Plan-et Continentally is a site that lets users post pictures of their holidays and get ideas for things to do when planning a trip. A user who has signed up can favourite and comment on posts or follow other accounts who give them inspiration.
+
+Link to live site - [Plan-et Continentally](https://plan-et-continentally-d407d6f9ae7a.herokuapp.com/)
+
+
+
+
+
+
+
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -12,9 +12,11 @@ import btnStyles from "../../styles/Button.module.css";
 
 import PopularProfiles from "./PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-import { useProfileData, useSetProfileData } from "../../contexts/ProfileDataContext";
+import {
+    useProfileData,
+    useSetProfileData } from "../../contexts/ProfileDataContext";
 import { Button, Image } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Post from "../posts/Post";
@@ -24,13 +26,16 @@ import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
+    const [profilePosts, setProfilePosts] = useState({ results: [] });
+
     const currentUser = useCurrentUser();
     const { id } = useParams();
-    const { setProfileData, handleFollow } = useSetProfileData();
+
+    const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
     const { pageProfile } = useProfileData();
+
     const [profile] = pageProfile.results;
     const is_owner = currentUser?.username === profile?.owner;
-    const [profilePosts, setProfilePosts] = useState({ results: [] });
 
     useEffect(() => {
         const fetchData = async () => {
@@ -82,7 +87,7 @@ function ProfilePage() {
                     {currentUser && !is_owner && (
                         profile?.following_id ? (
                             <Button className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-                                onClick={() => { }} >
+                                onClick={() => {handleUnfollow(profile) }} >
                                 Unfollow
                             </Button>
                         ) : (

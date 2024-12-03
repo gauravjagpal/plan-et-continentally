@@ -19,7 +19,6 @@ export const ProfileDataProvider = ({ children }) => {
   const currentUser = useCurrentUser();
 
   const handleFollow = async (clickedProfile) => {
-    console.log("Follow button clicked", clickedProfile);
     try {
       const { data } = await axiosRes.post("/followers/", {
         followed: clickedProfile.id,
