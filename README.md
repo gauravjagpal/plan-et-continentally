@@ -75,7 +75,7 @@ I wanted to make a site that is easy to access and navigate for the users. React
 ### Visitor Goal
 - View different posts from different users
 - View all posts
-- Create an account and engage with the site and other users and site owner.
+- Create an account and engage with the site and other users.
 - Log in and out of their account.
 - Read posts and comments
 - Leave a comment and favourite a post
