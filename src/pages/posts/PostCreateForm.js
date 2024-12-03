@@ -18,8 +18,10 @@ import btnStyles from "../../styles/Button.module.css";
 
 import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
+import { useRedirect } from "../../hooks/useRedirect";
 
 function PostCreateForm() {
+    useRedirect('loggedOut')
     const [errors, setErrors] = useState({});
 
     const [postData, setPostData] = useState({
@@ -42,10 +44,13 @@ function PostCreateForm() {
 
         const fetchCountries = async () => {
             try {
-                const response = await axiosReq.get("https://restcountries.com/v3.1/all"); // Example API URL
+                const response = await axiosReq.get("https://restcountries.com/v3.1/all");
                 setCountries(response.data);
-            } catch (error) {
-                console.error("Error fetching countries:", error);
+            } catch (err) {
+                console.err("Error fetching countries:", err)
+                if (err.response?.status !== 401) {
+                    setErrors(err.response?.data);
+                }
             }
         };
         fetchCountries();
@@ -103,25 +108,36 @@ function PostCreateForm() {
 
             <Form.Group>
                 <Form.Label>Country</Form.Label>
-                <Form.Control as="select" name="country" value={country} onChange={handleChange}>
-                    <option value="">Select a country</option>
-                    {countries.map((country, idx) => (
-                        <option key={idx} value={country.cca2}>
-                            {country.name.common}
-                        </option>
+                <Form.Group controlId="countrySelect">
+                    <Form.Control as="select" name="country" value={country} onChange={handleChange}>
+                        <option value="">Select a country</option>
+                        {countries.map((country, idx) => (
+                            <option key={idx} value={country.cca2}>
+                                {country.name.common}
+                            </option>
+                        ))}
+                    </Form.Control>
+
+                    {/* Display error messages if there are any related to 'country' */}
+                    {errors.country?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
                     ))}
-                </Form.Control>
+                </Form.Group>
             </Form.Group>
 
             <Form.Group>
                 <Form.Label>Content</Form.Label>
-                <Form.Control as="textarea" name="content" rows={6} value={content} onChange={handleChange} />
+                <Form.Control as="textarea" name="content" rows={6} value={content} onChange={handleChange}>
+
+                </Form.Control>
+                {errors?.content?.map((message, idx) => (
+                    <Alert variant="warning" key={idx}>
+                        {message}
+                    </Alert>
+                ))}
             </Form.Group>
-            {errors?.content?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                    {message}
-                </Alert>
-            ))}
 
             <Button
                 className={`${btnStyles.Button} ${btnStyles.Blue}`}

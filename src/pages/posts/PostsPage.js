@@ -55,7 +55,6 @@ function PostsPage({ message, filter = "" }) {
             type="text"
             className="mr-sm-2"
             placeholder="Search Posts">
-
           </Form.Control>
         </Form>
 
@@ -71,7 +70,7 @@ function PostsPage({ message, filter = "" }) {
                 dataLength={posts.results.length}
                 loader={<Asset spinner />}
                 hasMore={!!posts.next}
-                next={() => fetchMoreData}
+                next={() => fetchMoreData(posts, setPosts)}
                 />
 
             ) : (
