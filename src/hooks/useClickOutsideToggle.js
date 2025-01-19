@@ -5,7 +5,7 @@ const useClickOutsideToggle = () => {
     const ref = useRef(null);
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (ref.current && !ref.current.contains(event.trigger)) {
+            if (ref.current && !ref.current.contains(event.target)) {
                 setExpanded(false)
             }
         }
