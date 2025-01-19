@@ -55,7 +55,10 @@ const NavBar = () => {
                         <img src={logo} alt="logo" height="45" />
                     </Navbar.Brand>
                 </NavLink>
-                <h1>Plan-et Continentally</h1>
+                {/* Making the h1 clickable */}
+                <NavLink to="/" className={styles.NavLink}>
+                    <h1>Plan-et Continentally</h1>
+                </NavLink>
                 {currentUser && addPostIcon}
                 <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
