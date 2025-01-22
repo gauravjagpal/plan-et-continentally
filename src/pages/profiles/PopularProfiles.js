@@ -8,7 +8,13 @@ import Profile from "./Profile";
 const PopularProfiles = ({ mobile }) => {
   const { popularProfiles } = useProfileData();
 
+  // Function to reload the page
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   return (
+    <div onClick={handleRefresh} style={{ cursor: "pointer" }}>
     <Container
       className={`${appStyles.Content} ${
         mobile && "d-lg-none text-center mb-3"
@@ -16,7 +22,7 @@ const PopularProfiles = ({ mobile }) => {
     >
       {popularProfiles.results.length ? (
         <>
-          <p>Most followed profiles.</p>
+          <p><strong>Most followed profiles:</strong></p>
           {mobile ? (
             <div className="d-flex justify-content-around">
               {popularProfiles.results.slice(0, 4).map((profile) => (
@@ -33,6 +39,7 @@ const PopularProfiles = ({ mobile }) => {
         <Asset spinner />
       )}
     </Container>
+    </div>
   );
 };
 
