@@ -11,8 +11,6 @@
   color: #636363;
 }
 
-
-
 nav h1 {
   font-family: "Playwrite IN", serif;
   font-size: 20px;
@@ -29,4 +27,13 @@ nav h1 {
 .NavLink {
   color: #ffffff; /* Navbar text color */
   text-decoration: none;
+}
+
+.active-dropdown-item {
+  background-color: grey !important; /* Gray background for active links */
+  color: white !important; /* Ensure text is readable */
+}
+
+.active-dropdown-item:hover {
+  background-color: pink !important; /* Darker gray on hover */
 }

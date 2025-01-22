@@ -1,0 +1,9 @@
+.Container {
+    min-height: 343px;
+  }
+
+  .scrollable-checkboxes {
+    max-height: 200px;  /* Set max height */
+    overflow-y: auto;   /* Enable vertical scrolling */
+    margin-top: 10px;
+  }
