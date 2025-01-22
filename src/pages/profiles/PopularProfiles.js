@@ -14,7 +14,7 @@ const PopularProfiles = ({ mobile }) => {
   };
 
   return (
-    <div onClick={handleRefresh} style={{ cursor: "pointer" }}>
+    <div onClick={handleRefresh}>
     <Container
       className={`${appStyles.Content} ${
         mobile && "d-lg-none text-center mb-3"

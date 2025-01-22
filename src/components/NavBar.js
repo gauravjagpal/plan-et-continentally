@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import logo from '../assets/logo.png';
 import styles from '../styles/NavBar.module.css';
 import { NavLink } from 'react-router-dom';
@@ -16,27 +17,57 @@ const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
 
-    const {expanded, setExpanded, ref} = useClickOutsideToggle();
+    const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
     const handleSignOut = async () => {
         try {
             await axios.post('dj-rest-auth/logout/');
             setCurrentUser(null);
             removeTokenTimestamp();
-        } catch(err) {
-            console.log(err)
+        } catch (err) {
+            console.log(err);
         }
     }
 
     const addPostIcon = (
-        <NavLink exact to="/posts/create" className={styles.NavLink} activeClassName={styles.Active}><i className='far fa-plus-square'></i>Add post</NavLink>
+        <NavLink 
+            exact to="/posts/create"
+            className={styles.NavLink}
+            activeClassName={styles.Active}
+        >
+            <i className='far fa-plus-square'></i>Add post
+        </NavLink>
     ) 
     const loggedInIcons = <>
-        <NavLink exact to="/feed" className={styles.NavLink} activeClassName={styles.Active}><i className='fas fa-stream'></i>Feed</NavLink>
-        <NavLink exact to="/favourites" className={styles.NavLink} activeClassName={styles.Active}><i className='fas fa-heart'></i>Favourites</NavLink>
-        <NavLink exact to="/" className={styles.NavLink} onClick={handleSignOut}><i className='fas fa-sign-out-alt'></i>Sign Out</NavLink>
-        <NavLink exact to={`/profiles/${currentUser?.profile_id}`} className={styles.NavLink}>
-            <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+        <NavLink
+            exact to="/feed" 
+            className={styles.NavLink} 
+            activeClassName={styles.Active}
+        >
+            <i className='fas fa-stream'></i>Feed
+        </NavLink>
+        <NavLink 
+            exact to="/favourites" 
+            className={styles.NavLink} 
+            activeClassName={styles.Active}
+        >
+            <i className='fas fa-heart'></i>Favourites
+        </NavLink>
+        <NavLink 
+            exact to="/" 
+            lassName={styles.NavLink} 
+            onClick={handleSignOut}
+        >
+            <i className='fas fa-sign-out-alt'></i>Sign Out
+        </NavLink>
+        <NavLink 
+            exact to={`/profiles/${currentUser?.profile_id}`} 
+            className={styles.NavLink}>
+            <Avatar 
+                src={currentUser?.profile_image} 
+                text="Profile" 
+                height={40}
+            />
             <span className={styles.Username}>{currentUser?.username}</span>
         </NavLink>
         
@@ -44,8 +75,20 @@ const NavBar = () => {
     </>
     const loggedOutIcons = 
     <>
-        <NavLink exact to="/signin" className={styles.NavLink} activeClassName={styles.Active}><i className='fas fa-sign-in-alt'></i> Sign in</NavLink>
-        <NavLink exact to="/signup" className={styles.NavLink} activeClassName={styles.Active}><i className='fas fa-user-plus'></i> Sign up</NavLink>
+        <NavLink 
+            exact to="/signin" 
+            className={styles.NavLink} 
+            activeClassName={styles.Active}
+        >
+            <i className='fas fa-sign-in-alt'></i> Sign in
+        </NavLink>
+        <NavLink 
+            exact to="/signup" 
+            className={styles.NavLink} 
+            activeClassName={styles.Active}
+        >
+            <i className='fas fa-user-plus'></i> Sign up
+        </NavLink>
     </>
     return (
         <Navbar expanded={expanded} className={styles.NavBar} expand="md" fix="top">
