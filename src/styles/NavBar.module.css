@@ -11,9 +11,7 @@
   color: #636363;
 }
 
-nav a {
-  color: #ffffff;
-}
+
 
 nav h1 {
   font-family: "Playwrite IN", serif;
@@ -26,4 +24,9 @@ nav h1 {
   font-style: normal;
   font-variant: normal;
   text-transform: none;
+}
+
+.NavLink {
+  color: #ffffff; /* Navbar text color */
+  text-decoration: none;
 }

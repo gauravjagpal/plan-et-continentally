@@ -30,66 +30,68 @@ const NavBar = () => {
     }
 
     const addPostIcon = (
-        <NavLink 
+        <NavLink
             exact to="/posts/create"
             className={styles.NavLink}
             activeClassName={styles.Active}
         >
             <i className='far fa-plus-square'></i>Add post
         </NavLink>
-    ) 
-    const loggedInIcons = <>
-        <NavLink
-            exact to="/feed" 
-            className={styles.NavLink} 
-            activeClassName={styles.Active}
-        >
-            <i className='fas fa-stream'></i>Feed
-        </NavLink>
-        <NavLink 
-            exact to="/favourites" 
-            className={styles.NavLink} 
-            activeClassName={styles.Active}
-        >
-            <i className='fas fa-heart'></i>Favourites
-        </NavLink>
-        <NavLink 
-            exact to="/" 
-            lassName={styles.NavLink} 
-            onClick={handleSignOut}
-        >
-            <i className='fas fa-sign-out-alt'></i>Sign Out
-        </NavLink>
-        <NavLink 
-            exact to={`/profiles/${currentUser?.profile_id}`} 
-            className={styles.NavLink}>
-            <Avatar 
-                src={currentUser?.profile_image} 
-                text="Profile" 
-                height={40}
-            />
-            <span className={styles.Username}>{currentUser?.username}</span>
-        </NavLink>
-        
-        
-    </>
-    const loggedOutIcons = 
-    <>
-        <NavLink 
-            exact to="/signin" 
-            className={styles.NavLink} 
-            activeClassName={styles.Active}
-        >
-            <i className='fas fa-sign-in-alt'></i> Sign in
-        </NavLink>
-        <NavLink 
-            exact to="/signup" 
-            className={styles.NavLink} 
-            activeClassName={styles.Active}
-        >
-            <i className='fas fa-user-plus'></i> Sign up
-        </NavLink>
-    </>
+    )
+    const loggedInIcons = (
+        <>
+            <NavLink
+                exact to="/feed"
+                className={styles.NavLink}
+                activeClassName={styles.Active}
+            >
+                <i className='fas fa-stream'></i>Feed
+            </NavLink>
+            <NavLink
+                exact to="/favourites"
+                className={styles.NavLink}
+                activeClassName={styles.Active}
+            >
+                <i className='fas fa-heart'></i>Favourites
+            </NavLink>
+            <NavDropdown
+                title={
+                    <span className={styles.NavLink}>
+                        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+                        <span className={styles.Username}>{currentUser?.username}</span>
+                    </span>
+                }
+                id="profile-dropdown"
+                align="end"
+                >
+                    <NavDropdown.Item as={NavLink} to={`/profiles/${currentUser?.profile_id}`}>
+                    <Avatar src={currentUser?.profile_image} text="Profile" height={30} />
+                        Profile
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleSignOut}>
+                        <i className='fas fa-sign-out-alt'></i> Sign Out
+                    </NavDropdown.Item>
+            </NavDropdown>
+        </>
+    );
+    const loggedOutIcons = (
+        <>
+            <NavLink
+                exact to="/signin"
+                className={styles.NavLink}
+                activeClassName={styles.Active}
+            >
+                <i className='fas fa-sign-in-alt'></i> Sign in
+            </NavLink>
+            <NavLink
+                exact to="/signup"
+                className={styles.NavLink}
+                activeClassName={styles.Active}
+            >
+                <i className='fas fa-user-plus'></i> Sign up
+            </NavLink>
+        </>
+    );
     return (
         <Navbar expanded={expanded} className={styles.NavBar} expand="md" fix="top">
             <Container>
