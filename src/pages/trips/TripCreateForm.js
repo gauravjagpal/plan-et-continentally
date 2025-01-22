@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -17,177 +16,192 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
 
 function TripCreateForm() {
-  useRedirect('loggedOut')
+  useRedirect('loggedOut');
   const [errors, setErrors] = useState({});
-
   const [tripData, setTripData] = useState({
-      trip: "",
-      activities: "",
-      image: "",
-      country: ''
+    trip: "",
+    activities: "",
+    image: "",
+    country: "",
   });
 
   const [countries, setCountries] = useState([]); // State to store countries
-  const { trip, activities, image, country } = tripData;
-
+  const { trip, activities, country,image } = tripData;
 
   const imageInput = useRef(null);
   const history = useHistory();
 
   useEffect(() => {
-
-      const fetchCountries = async () => {
-          try {
-              const response = await axiosReq.get("https://restcountries.com/v3.1/all");
-              setCountries(response.data);
-          } catch (err) {
-              console.err("Error fetching countries:", err)
-              if (err.response?.status !== 401) {
-                  setErrors(err.response?.data);
-              }
-          }
-      };
-      fetchCountries();
+    const fetchCountries = async () => {
+      try {
+        const response = await axiosReq.get("https://restcountries.com/v3.1/all");
+        setCountries(response.data);
+      } catch (err) {
+        console.error("Error fetching countries:", err);
+        if (err.response?.status !== 401) {
+          setErrors(err.response?.data);
+        }
+      }
+    };
+    fetchCountries();
   }, []);
 
   const handleChange = (event) => {
-      setTripData({
-          ...tripData,
-          [event.target.name]: event.target.value,
-      });
+    setTripData({
+      ...tripData,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const handleChangeImage = (event) => {
-      if (event.target.files.length) {
-          URL.revokeObjectURL(image);
-          setTripData({
-              ...tripData,
-              image: URL.createObjectURL(event.target.files[0]),
-          });
-      }
+    if (event.target.files.length) {
+      URL.revokeObjectURL(image);
+      setTripData({
+        ...tripData,
+        image: URL.createObjectURL(event.target.files[0]),
+      });
+    }
   };
 
   const handleSubmit = async (event) => {
-      event.preventDefault();
-      const formData = new FormData();
+    event.preventDefault();
 
-      formData.append("trip", trip);
-      formData.append("activities", activities);
-      formData.append("country", country);
-      formData.append("image", imageInput.current.files[0]);
+    const formData = new FormData();
+    formData.append("trip", trip);
+    formData.append("activities", activities);
+    formData.append("country", country);
+    formData.append("image", imageInput.current.files[0]);
 
-      try {
-          const { data } = await axiosReq.post("/trips/", formData);
-          history.push(`/trips/${data.id}`);
-      } catch (err) {
-          console.log(err);
-          if (err.response?.status !== 401) {
-              setErrors(err.response?.data);
-          }
+    try {
+      const { data } = await axiosReq.post("/trips/", formData);
+      history.push(`/trips/${data.id}`);
+    } catch (err) {
+      console.error("Error creating trip:", err);
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
       }
+    }
   };
 
-
   const textFields = (
-      <div className="text-center">
-          <Form.Group>
-              <Form.Label>Trip to:</Form.Label>
-              <Form.Control type="text" name="trip" value={trip} onChange={handleChange} />
-          </Form.Group>
-          {errors?.trip?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                  {message}
-              </Alert>
-          ))}
+    <div className="text-center">
+      <Form.Group>
+        <Form.Label>Trip to:</Form.Label>
+        <Form.Control
+          type="text"
+          name="trip"
+          value={trip}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.trip?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
-          <Form.Group>
-              <Form.Label>Country</Form.Label>
-              <Form.Group controlId="countrySelect">
-                  <Form.Control as="select" name="country" value={country} onChange={handleChange}>
-                      <option value="">Select a country</option>
-                      {countries.map((country, idx) => (
-                          <option key={idx} value={country.cca2}>
-                              {country.name.common}
-                          </option>
-                      ))}
-                  </Form.Control>
-
-                  {/* Display error messages if there are any related to 'country' */}
-                  {errors.country?.map((message, idx) => (
-                      <Alert variant="warning" key={idx}>
-                          {message}
-                      </Alert>
-                  ))}
-              </Form.Group>
-          </Form.Group>
-
-          <Form.Group>
-              <Form.Label>Activities</Form.Label>
-              <Form.Control as="textarea" placeholder="Add activities..." name="activities" rows={3} value={activities} onChange={handleChange}>
-
-              </Form.Control>
-              {errors?.activities?.map((message, idx) => (
-                  <Alert variant="warning" key={idx}>
-                      {message}
-                  </Alert>
-              ))}
-          </Form.Group>
-
-          <Button
-              className={`${btnStyles.Button} ${btnStyles.Blue}`}
-              onClick={() => history.goBack()}
+      <Form.Group>
+        <Form.Label>Country</Form.Label>
+        <Form.Group controlId="countrySelect">
+          <Form.Control
+            as="select"
+            name="country"
+            value={country}
+            onChange={handleChange}
           >
-              Cancel
-          </Button>
-          <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-              Create
-          </Button>
-      </div>
+            <option value="">Select a country</option>
+            {countries.map((country, idx) => (
+              <option key={idx} value={country.cca2}>
+                {country.name.common}
+              </option>
+            ))}
+          </Form.Control>
+          {errors.country?.map((message, idx) => (
+            <Alert variant="warning" key={idx}>
+              {message}
+            </Alert>
+          ))}
+        </Form.Group>
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Activities</Form.Label>
+        <Form.Control
+          as="textarea"
+          placeholder="Add activities..."
+          name="activities"
+          rows={3}
+          value={activities}
+          onChange={handleChange}
+        />
+        {errors?.activities?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
+      </Form.Group>
+
+      <Button
+        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        onClick={() => history.goBack()}
+      >
+        Cancel
+      </Button>
+      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+        Create
+      </Button>
+    </div>
   );
 
   return (
-      <Form onSubmit={handleSubmit}>
-          <Row className="d-flex justify-content-center align-items-center">
-              <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
-                  <Container
-                      className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center align-items-center`}
-                  >
-                      <Form.Group className="text-center">
-                          {image ? (
-                              <>
-                                  <figure>
-                                      <Image className={appStyles.Image} src={image} rounded />
-                                  </figure>
-                                  <div>
-                                      <Form.Label className={`${btnStyles.Button} ${btnStyles.Blue} btn`} htmlFor="image-upload" >
-                                          Change the image
-                                      </Form.Label>
-                                  </div>
-                              </>
-                          ) : (
-                              <Form.Label
-                                  className="d-flex justify-content-center"
-                                  htmlFor="image-upload"
-                              >
-                                  <Asset src={Upload} message="Click to upload an image" />
-                              </Form.Label>
-                          )}
+    <Form onSubmit={handleSubmit}>
+      <Row className="d-flex justify-content-center align-items-center">
+        <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
+          <Container
+            className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center align-items-center`}
+          >
+            <Form.Group className="text-center">
+              {image ? (
+                <>
+                  <figure>
+                    <Image className={appStyles.Image} src={image} rounded />
+                  </figure>
+                  <div>
+                    <Form.Label
+                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                      htmlFor="image-upload"
+                    >
+                      Change the image
+                    </Form.Label>
+                  </div>
+                </>
+              ) : (
+                <Form.Label
+                  className="d-flex justify-content-center"
+                  htmlFor="image-upload"
+                >
+                  <Asset src={Upload} message="Click to upload an image" />
+                </Form.Label>
+              )}
 
-                          <Form.File id="image-upload" accept="image/*" onChange={handleChangeImage} ref={imageInput} />
-
-                      </Form.Group>
-                      {errors?.image?.map((message, idx) => (
-                          <Alert variant="warning" key={idx} className="text-center" >
-                              An image must be uploaded
-                          </Alert>
-                      ))}
-
-                      <div className="d-md-none">{textFields}</div>
-                  </Container>
-                  <Container className={appStyles.Content}>{textFields}</Container>
-              </Col>
-          </Row>
-      </Form>
+              <Form.Control
+                type="file"
+                id="image-upload"
+                accept="image/*"
+                onChange={handleChangeImage}
+                ref={imageInput}
+              />
+            </Form.Group>
+            {errors?.image?.map((message, idx) => (
+              <Alert variant="warning" key={idx} className="text-center">
+                An image must be uploaded
+              </Alert>
+            ))}
+          </Container>
+          <Container className={appStyles.Content}>{textFields}</Container>
+        </Col>
+      </Row>
+    </Form>
   );
 }
 
