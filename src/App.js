@@ -46,7 +46,8 @@ function App() {
           <Route 
             exact path="/trips/mytrips" 
             render={() => (
-              <TripsPage message='No results. Adjust Search Criteria.' />
+              <TripsPage message='No results. Adjust Search Criteria.' 
+              filter={`owner__profile=${profile_id}&`}/>
             )} />
           <Route exact path="/trips/:id" render={() => <TripPage />} />
           <Route
