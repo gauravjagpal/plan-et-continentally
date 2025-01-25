@@ -11,7 +11,6 @@ const Trip = (props) => {
         owner,
         profile_id,
         profile_image,
-        comments_count,
         trip,
         country,
         image,

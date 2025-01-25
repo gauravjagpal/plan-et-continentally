@@ -69,14 +69,20 @@ const NavBar = () => {
                         as={NavLink}
                         to={`/profiles/${currentUser?.profile_id}`}                    
                     >
-                    <Avatar src={currentUser?.profile_image} text="Profile" height={30} />
+                    <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
                         Profile
                     </NavDropdown.Item>
                     <NavDropdown.Item 
                         as={NavLink}
                         to={`/trips/create`}
                     >
-                    <i class="fa-duotone fa-solid fa-suitcase"></i> Add Trips
+                    <i class="fas fa-plane"></i> Add Trips
+                    </NavDropdown.Item>
+                    <NavDropdown.Item 
+                        as={NavLink}
+                        to={`/trips/mytrips`}
+                    >
+                    <i class="fa-duotone fa-solid fa-suitcase"></i> My Trips
                     </NavDropdown.Item>
                     <NavDropdown.Item onClick={handleSignOut}>
                         <i className='fas fa-sign-out-alt'></i> Sign Out

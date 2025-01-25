@@ -16,6 +16,7 @@ import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import TripCreateForm from './pages/trips/TripCreateForm';
 import TripPage from './pages/trips/TripPage';
+import TripsPage from './pages/trips/TripsPage';
 
 
 function App() {
@@ -42,6 +43,11 @@ function App() {
           <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
           <Route exact path="/profiles/:id/" render={() => <ProfilePage />} />
           <Route exact path="/trips/create" render={() => <TripCreateForm />} />
+          <Route 
+            exact path="/trips/mytrips" 
+            render={() => (
+              <TripsPage message='No results. Adjust Search Criteria.' />
+            )} />
           <Route exact path="/trips/:id" render={() => <TripPage />} />
           <Route
             exact path="/profiles/:id/edit/username" render={() => <UsernameForm />}
