@@ -44,8 +44,17 @@ function TripsPage({ message, filter = "" }) {
 
     return (
         <Row className="h-100">
-            <Col className="py-2 p-0 p-lg-2" lg={8}>
-                <Button 
+            <Col className="py-2 p-0 p-lg-2 mx-auto" lg={8}>
+                <i className={`fas fa-search ${styles.SearchIcon}`} />
+                <Form className={styles.SearchBar} onSubmit={(event) => event.preventDefault(0)}>
+                    <Form.Control value={query}
+                        onChange={(event) => setQuery(event.target.value)}
+                        type="text"
+                        className="mr-sm-2"
+                        placeholder="Search Trips">
+                    </Form.Control>
+                </Form>
+                <Button
                     href="/trips/create"
                     className={`${btnStyles.Button} ${btnStyles.Blue}`}
                     type="submit">
@@ -77,9 +86,6 @@ function TripsPage({ message, filter = "" }) {
                         <Asset spinner />
                     </Container>
                 )}
-            </Col>
-            <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-                <p>Popular profiles for desktop</p>
             </Col>
         </Row>
     );

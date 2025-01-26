@@ -1,24 +1,43 @@
 .Trip {
-    background-color: #ffffff;
-    border: 1px solid #dadadf;
-    border-radius: 2px;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  .Trip figure,
-  h5 {
-    margin: 0 0;
-  }
-  
-  .Heart {
-    color: #f85032;
-  }
-  
-  .Heart:hover {
-    color: #2142b2;
-  }
-  
-  .HeartOutline:hover {
-    color: #f85032;
-  }
+  background-color: #ffffff;
+  border: 1px solid #dadadf;
+  border-radius: 2px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.Trip figure,
+h5 {
+  margin: 0 0;
+}
+
+.Heart {
+  color: #f85032;
+}
+
+.Heart:hover {
+  color: #2142b2;
+}
+
+.HeartOutline:hover {
+  color: #f85032;
+}
+
+.imageWrapper {
+  width: 100%;
+  position: relative;
+  padding-top: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+.tripImage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}

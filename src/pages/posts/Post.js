@@ -21,16 +21,16 @@ const Post = (props) => {
 
     const handleEdit = () => {
         history.push(`/posts/${id}/edit`);
-      };
-    
-      const handleDelete = async () => {
+    };
+
+    const handleDelete = async () => {
         try {
-          await axiosRes.delete(`/posts/${id}/`);
-          history.goBack();
+            await axiosRes.delete(`/posts/${id}/`);
+            history.goBack();
         } catch (err) {
-          console.log(err);
+            console.log(err);
         }
-      };
+    };
 
     const handleFavourite = async () => {
         try {
@@ -52,7 +52,7 @@ const Post = (props) => {
         }
     }
 
-    
+
 
     const handleUnfavourite = async () => {
         try {
@@ -80,13 +80,15 @@ const Post = (props) => {
                     </Link>
                     <div className='d-flex align-items-center'>
                         <span>{updated_at}</span>
-                        {is_owner && postPage && (<MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete}/>)}
-                       
+                        {is_owner && postPage && (<MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete} />)}
+
                     </div>
                 </Media>
             </Card.Body>
             <Link to={`/posts/${id}`}>
-                <Card.Img src={image} alt={title} />
+                <div className={styles.imageWrapper}>
+                    <Card.Img className={styles.postImage} src={image} alt={title} />
+                </div>
             </Link>
             <Card.Body>
                 {country && <Card.Text className={styles.Country}>Trip to: {country}</Card.Text>}

@@ -35,7 +35,9 @@ const Trip = (props) => {
             </Media>
         </Card.Body>
         <Link to={`/trips/${id}`}>
-            <Card.Img src={image} alt={trip} />
+            <div className={styles.imageWrapper}>
+                <Card.Img className={styles.tripImage} src={image} alt={trip} />
+            </div>
         </Link>
         <Card.Body>
             {trip && <Card.Title className='text-center'>{trip}</Card.Title>}
