@@ -2,8 +2,10 @@ import React from 'react'
 import styles from '../../styles/Trip.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContext'
 import { Card, Media } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
+import { axiosRes } from '../../api/axiosDefaults';
+import { MoreDropdown } from '../../components/MoreDropdown';
 
 const Trip = (props) => {
     const {
@@ -20,6 +22,20 @@ const Trip = (props) => {
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner
+    const history = useHistory();
+
+    const handleEdit = () => {
+            history.push(`/trips/${id}/edit`);
+        };
+    
+        const handleDelete = async () => {
+            try {
+                await axiosRes.delete(`/trips/${id}/`);
+                history.goBack();
+            } catch (err) {
+                console.log(err);
+            }
+        };
 
     return <Card className={styles.Trip}>
         <Card.Body>
@@ -30,7 +46,7 @@ const Trip = (props) => {
                 </Link>
                 <div className='d-flex align-items-center'>
                     <span>{updated_at}</span>
-                    {is_owner && tripPage && '...'}
+                    {is_owner && tripPage && (<MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete} />)}
                 </div>
             </Media>
         </Card.Body>

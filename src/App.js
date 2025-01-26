@@ -17,6 +17,7 @@ import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import TripCreateForm from './pages/trips/TripCreateForm';
 import TripPage from './pages/trips/TripPage';
 import TripsPage from './pages/trips/TripsPage';
+import TripEditForm from './pages/trips/TripEditForm';
 
 
 function App() {
@@ -43,12 +44,13 @@ function App() {
           <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
           <Route exact path="/profiles/:id/" render={() => <ProfilePage />} />
           <Route exact path="/trips/create" render={() => <TripCreateForm />} />
-          <Route 
-            exact path="/trips/mytrips" 
+          <Route
+            exact path="/trips/mytrips"
             render={() => (
-              <TripsPage message='No results. Adjust Search Criteria.' 
-              filter={`owner__profile=${profile_id}&`}/>
+              <TripsPage message='No results. Adjust Search Criteria.'
+                filter={`owner__profile=${profile_id}&`} />
             )} />
+          <Route exact path="/trips/:id/edit" render={() => <TripEditForm />} />
           <Route exact path="/trips/:id" render={() => <TripPage />} />
           <Route
             exact path="/profiles/:id/edit/username" render={() => <UsernameForm />}
@@ -60,7 +62,7 @@ function App() {
             exact path="/profiles/:id/edit" render={() => <ProfileEditForm />}
           />
           <Route render={() => <p>Page not found!</p>} />
-          
+
         </Switch>
       </Container>
     </div>
