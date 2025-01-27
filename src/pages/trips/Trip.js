@@ -1,11 +1,12 @@
 import React from 'react'
 import styles from '../../styles/Trip.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContext'
-import { Card, Media } from 'react-bootstrap';
+import { Card, Container, Media } from 'react-bootstrap';
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from '../../api/axiosDefaults';
 import { MoreDropdown } from '../../components/MoreDropdown';
+import appStyles from "../../App.module.css";
 
 const Trip = (props) => {
     const {
@@ -15,6 +16,7 @@ const Trip = (props) => {
         profile_image,
         trip,
         country,
+        activities,
         image,
         updated_at,
         tripPage
@@ -25,17 +27,17 @@ const Trip = (props) => {
     const history = useHistory();
 
     const handleEdit = () => {
-            history.push(`/trips/${id}/edit`);
-        };
-    
-        const handleDelete = async () => {
-            try {
-                await axiosRes.delete(`/trips/${id}/`);
-                history.goBack();
-            } catch (err) {
-                console.log(err);
-            }
-        };
+        history.push(`/trips/${id}/edit`);
+    };
+
+    const handleDelete = async () => {
+        try {
+            await axiosRes.delete(`/trips/${id}/`);
+            history.goBack();
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return <Card className={styles.Trip}>
         <Card.Body>
@@ -58,8 +60,14 @@ const Trip = (props) => {
         <Card.Body>
             {trip && <Card.Title className='text-center'>{trip}</Card.Title>}
             {country && <Card.Text>{country}</Card.Text>}
-
         </Card.Body>
+        <Card.Body>
+            <Container className={appStyles.Content}>
+                Activities
+            </Container>
+            {activities && <Card.Title className='text-center'>{activities}</Card.Title>}
+        </Card.Body>
+
     </Card>
 }
 
