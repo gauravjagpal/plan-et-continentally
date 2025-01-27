@@ -76,13 +76,13 @@ const NavBar = () => {
                         as={NavLink}
                         to={`/trips/create`}
                     >
-                    <i class="fas fa-plane"></i> Add Trips
+                    <i className="fas fa-plane"></i> Add Trips
                     </NavDropdown.Item>
                     <NavDropdown.Item 
                         as={NavLink}
                         to={`/trips/mytrips`}
                     >
-                    <i class="fa-duotone fa-solid fa-suitcase"></i> My Trips
+                    <i className="fa-duotone fa-solid fa-suitcase"></i> My Trips
                     </NavDropdown.Item>
                     <NavDropdown.Item onClick={handleSignOut}>
                         <i className='fas fa-sign-out-alt'></i> Sign Out
