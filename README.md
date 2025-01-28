@@ -17,10 +17,10 @@ Link to live site - [Plan-et Continentally](https://plan-et-continentally-d407d6
 
 Link to backend github - [Back End](https://github.com/gauravjagpal/drf-api-project5)
 
-## CONTENTS
+## Contents
 - [Plan-et Continentally](#plan-et-continentally)
     - [Am I Responsive](#am-i-responsive)
-  - [CONTENTS](#contents)
+  - [Contents](#contents)
   - [Site Objectives](#site-objectives)
 - [User Experience/UX](#user-experienceux)
   - [Target Audience](#target-audience)
@@ -81,7 +81,9 @@ I wanted to make a site that is easy to access and navigate for the users. React
 - Leave a comment and favourite a post
 
 # Design Choices
-
+## Colour Scheme
+I have chosen a fairly neutral colour scheme, with the 3 colours being white for a clean look
+and grey and blue for a contrasting and professional finish
 ## Typography
 
 The main font used is DM Sans with a backup of sans serif
@@ -108,10 +110,14 @@ A user should be able to:
 - View Posts on Home Page
 - Leave a comment on Post.
 - Follow their favourite users
+- Add a trip - this will be pivate
+- Edit a trip - this will be pivate
 
 ## Future Features
 - Add a share feature to send posts to friends
-- Add more filters, such as a city and country 
+- Add more filters, such as a city
+- Add a collaboration feature so you can add friends to your trip section
+the idea of this section is for a user to be able to plan their trip with friends
 
 
 # Technologies Used
@@ -143,13 +149,23 @@ This project was designed using Agile methodology, utilising the Project Board a
 
 - [Project Board](https://github.com/users/gauravjagpal/projects/3)
 
+# Testing
+Please refer to [TESTING.md](TESTING.md) file for all testing carried out. 
+
+### Solved Bugs
+
+| No | Bug | How I solved the issue |
+| :--- | :--- | :--- |
+| 1 | Navbar dropdown was not working in mobile view. I corrected this by adding a media query and removing it from the dropdown. |
+| 2 | Editing a Country was not working in both the EditTrips and EditPosts. This was to do with how I was referencing them in both the serializers in the back and the country codes in the front end
 
 
 # Deployment
 ## Dev environment
 To run the app in a dev evnironment I would do the following:
 
-### `npm start`
+### `nvm install 16 && nvm use 16`
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

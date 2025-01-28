@@ -133,7 +133,7 @@ const NavBar = () => {
                         <i className="fas fa-sign-out-alt"></i> Sign Out
                     </NavDropdown.Item>
                 </NavDropdown>
-            )};
+            )}
         </>
     );
 
