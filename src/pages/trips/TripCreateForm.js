@@ -1,11 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Alert from "react-bootstrap/Alert";
-import Image from "react-bootstrap/Image";
+import { Form, Button, Row, Col, Container, Alert, Image } from "react-bootstrap";
 import Asset from "../../components/Asset";
 import Upload from "../../assets/upload.png";
 import styles from "../../styles/TripCreateEditForm.module.css";
@@ -13,10 +7,8 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-import { useRedirect } from "../../hooks/useRedirect";
 
 function TripCreateForm() {
-  useRedirect('loggedOut');
   const [errors, setErrors] = useState({});
   const [tripData, setTripData] = useState({
     trip: "",
@@ -24,10 +16,7 @@ function TripCreateForm() {
     image: "",
     country: "",
   });
-
-  const [countries, setCountries] = useState([]); // State to store countries
-  const { trip, activities, country,image } = tripData;
-
+  const [countries, setCountries] = useState([]); // Store countries here
   const imageInput = useRef(null);
   const history = useHistory();
 
@@ -38,9 +27,6 @@ function TripCreateForm() {
         setCountries(response.data);
       } catch (err) {
         console.error("Error fetching countries:", err);
-        if (err.response?.status !== 401) {
-          setErrors(err.response?.data);
-        }
       }
     };
     fetchCountries();
@@ -55,7 +41,7 @@ function TripCreateForm() {
 
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
-      URL.revokeObjectURL(image);
+      URL.revokeObjectURL(tripData.image);
       setTripData({
         ...tripData,
         image: URL.createObjectURL(event.target.files[0]),
@@ -65,11 +51,10 @@ function TripCreateForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const formData = new FormData();
-    formData.append("trip", trip);
-    formData.append("activities", activities);
-    formData.append("country", country);
+    formData.append("trip", tripData.trip);
+    formData.append("activities", tripData.activities);
+    formData.append("country", tripData.country);
     formData.append("image", imageInput.current.files[0]);
 
     try {
@@ -83,76 +68,6 @@ function TripCreateForm() {
     }
   };
 
-  const textFields = (
-    <div className="text-center">
-      <Form.Group>
-        <Form.Label>Trip to:</Form.Label>
-        <Form.Control
-          type="text"
-          name="trip"
-          value={trip}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors?.trip?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-
-      <Form.Group>
-        <Form.Label>Country</Form.Label>
-        <Form.Group controlId="countrySelect">
-          <Form.Control
-            as="select"
-            name="country"
-            value={country}
-            onChange={handleChange}
-          >
-            <option value="">Select a country</option>
-            {countries.map((country, idx) => (
-              <option key={idx} value={country.cca2}>
-                {country.name.common}
-              </option>
-            ))}
-          </Form.Control>
-          {errors.country?.map((message, idx) => (
-            <Alert variant="warning" key={idx}>
-              {message}
-            </Alert>
-          ))}
-        </Form.Group>
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Label>Activities</Form.Label>
-        <Form.Control
-          as="textarea"
-          placeholder="Add activities..."
-          name="activities"
-          rows={3}
-          value={activities}
-          onChange={handleChange}
-        />
-        {errors?.activities?.map((message, idx) => (
-          <Alert variant="warning" key={idx}>
-            {message}
-          </Alert>
-        ))}
-      </Form.Group>
-
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => history.goBack()}
-      >
-        Cancel
-      </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        Create
-      </Button>
-    </div>
-  );
-
   return (
     <Form onSubmit={handleSubmit}>
       <Row className="d-flex justify-content-center align-items-center">
@@ -160,21 +75,12 @@ function TripCreateForm() {
           <Container
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center align-items-center`}
           >
+            {/* Image Upload */}
             <Form.Group className="text-center">
-              {image ? (
-                <>
-                  <figure>
-                    <Image className={appStyles.Image} src={image} rounded />
-                  </figure>
-                  <div>
-                    <Form.Label
-                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
-                      htmlFor="image-upload"
-                    >
-                      Change the image
-                    </Form.Label>
-                  </div>
-                </>
+              {tripData.image ? (
+                <figure>
+                  <Image className={appStyles.Image} src={tripData.image} rounded />
+                </figure>
               ) : (
                 <Form.Label
                   className="d-flex justify-content-center"
@@ -183,7 +89,6 @@ function TripCreateForm() {
                   <Asset src={Upload} message="Click to upload an image" />
                 </Form.Label>
               )}
-
               <Form.Control
                 type="file"
                 id="image-upload"
@@ -193,12 +98,79 @@ function TripCreateForm() {
               />
             </Form.Group>
             {errors?.image?.map((message, idx) => (
-              <Alert variant="warning" key={idx} className="text-center">
-                An image must be uploaded
+              <Alert variant="warning" key={idx}>
+                {message}
               </Alert>
             ))}
           </Container>
-          <Container className={appStyles.Content}>{textFields}</Container>
+
+          {/* Trip Fields */}
+          <Container className={appStyles.Content}>
+            <Form.Group>
+              <Form.Label>Trip to:</Form.Label>
+              <Form.Control
+                type="text"
+                name="trip"
+                value={tripData.trip}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            {errors?.trip?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
+
+            {/* Country Selector */}
+            <Form.Group>
+              <Form.Label>Country</Form.Label>
+              <Form.Control
+                as="select"
+                name="country"
+                value={tripData.country}
+                onChange={handleChange}
+              >
+                <option value="">Select a country</option>
+                {countries.map((countryObj, idx) => (
+                  <option key={idx} value={countryObj.cca2}>
+                    {countryObj.name.common}
+                  </option>
+                ))}
+              </Form.Control>
+              {errors?.country?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
+            </Form.Group>
+
+            {/* Activities */}
+            <Form.Group>
+              <Form.Label>Activities</Form.Label>
+              <Form.Control
+                as="textarea"
+                name="activities"
+                rows={3}
+                value={tripData.activities}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            {errors?.activities?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
+
+            <Button
+              className={`${btnStyles.Button} ${btnStyles.Blue}`}
+              onClick={() => history.goBack()}
+            >
+              Cancel
+            </Button>
+            <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+              Create
+            </Button>
+          </Container>
         </Col>
       </Row>
     </Form>

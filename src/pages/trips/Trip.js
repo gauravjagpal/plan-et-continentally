@@ -1,12 +1,11 @@
 import React from 'react'
 import styles from '../../styles/Trip.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContext'
-import { Card, Container, Media } from 'react-bootstrap';
+import { Card, Media } from 'react-bootstrap';
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from '../../api/axiosDefaults';
 import { MoreDropdown } from '../../components/MoreDropdown';
-import appStyles from "../../App.module.css";
 
 const Trip = (props) => {
     const {
@@ -58,16 +57,10 @@ const Trip = (props) => {
             </div>
         </Link>
         <Card.Body>
+            {country && <Card.Text className={styles.Country}>Trip to: {country}</Card.Text>}
             {trip && <Card.Title className='text-center'>{trip}</Card.Title>}
-            {country && <Card.Text>{country}</Card.Text>}
+            {activities && <Card.Text>{activities}</Card.Text>}
         </Card.Body>
-        <Card.Body>
-            <Container className={appStyles.Content}>
-                Activities
-            </Container>
-            {activities && <Card.Title className='text-center'>{activities}</Card.Title>}
-        </Card.Body>
-
     </Card>
 }
 

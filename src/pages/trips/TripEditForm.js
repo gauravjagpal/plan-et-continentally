@@ -120,9 +120,9 @@ const TripEditForm = () => {
       <Form.Group>
         <Form.Label>Country</Form.Label>
         <Form.Control as="select" name="country" value={country} onChange={handleChange}>
-          <option value={country.cca2}>{country}</option>
+          <option value={country}>{country}</option>
           {countries.map((countryObj, idx) => (
-            <option key={idx} value={countryObj.cca2}>
+            <option key={idx} value={countryObj.name.common}>
               {countryObj.name.common}
             </option>
           ))}
