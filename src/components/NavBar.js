@@ -11,7 +11,7 @@ import Avatar from "./Avatar";
 import axios from 'axios';
 import useClickOutsideToggle from '../hooks/useClickOutsideToggle';
 import { removeTokenTimestamp } from '../utils/utils';
-
+import { useMediaQuery } from 'react-responsive';
 
 const NavBar = () => {
     const currentUser = useCurrentUser();
@@ -29,73 +29,120 @@ const NavBar = () => {
         }
     }
 
-    const addPostIcon = (
-        <NavLink
-            exact to="/posts/create"
-            className={styles.NavLink}
-            activeClassName={styles.Active}
-        >
-            <i className='far fa-plus-square'></i>Add post
-        </NavLink>
-    )
+    const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
+
     const loggedInIcons = (
         <>
             <NavLink
-                exact to="/feed"
+                exact
+                to="/posts/create"
                 className={styles.NavLink}
                 activeClassName={styles.Active}
+                onClick={() => setExpanded(false)} // Collapse menu
             >
-                <i className='fas fa-stream'></i>Feed
+                <i className="far fa-plus-square"></i> Add Post
             </NavLink>
             <NavLink
-                exact to="/favourites"
+                exact
+                to="/feed"
                 className={styles.NavLink}
                 activeClassName={styles.Active}
+                onClick={() => setExpanded(false)}
             >
-                <i className='fas fa-heart'></i>Favourites
+                <i className="fas fa-stream"></i> Feed
             </NavLink>
-            <NavDropdown
-                title={
-                    <span className={styles.NavLink}>
-                        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
-                        <span className={styles.Username}>{currentUser?.username}</span>
-                    </span>
-                }
-                id="profile-dropdown"
-                align="end"
-                className="custom-dropdown" 
-                >
-                    <NavDropdown.Item 
-                        as={NavLink}
-                        to={`/profiles/${currentUser?.profile_id}`}                    
+            <NavLink
+                exact
+                to="/favourites"
+                className={styles.NavLink}
+                activeClassName={styles.Active}
+                onClick={() => setExpanded(false)}
+            >
+                <i className="fas fa-heart"></i> Favourites
+            </NavLink>
+            {isMobile ? (
+                <>
+                    <NavLink
+                        exact
+                        to={`/profiles/${currentUser?.profile_id}`}
+                        className={styles.NavLink}
+                        activeClassName={styles.Active}
+                        onClick={() => setExpanded(false)}
                     >
-                    <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+                        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+                        Profile
+                    </NavLink>
+                    <NavLink
+                        exact
+                        to="/trips/create"
+                        className={styles.NavLink}
+                        activeClassName={styles.Active}
+                        onClick={() => setExpanded(false)}
+                    >
+                        <i className="fas fa-plane"></i> Add Trips
+                    </NavLink>
+                    <NavLink
+                        exact
+                        to="/trips/mytrips"
+                        className={styles.NavLink}
+                        activeClassName={styles.Active}
+                        onClick={() => setExpanded(false)}
+                    >
+                        <i className="fas fa-suitcase"></i> My Trips
+                    </NavLink>
+                    <NavLink
+                        to="/"
+                        className={styles.NavLink}
+                        onClick={() => {
+                            handleSignOut();
+                            setExpanded(false);
+                        }}
+                    >
+                        <i className="fas fa-sign-out-alt"></i> Sign Out
+                    </NavLink>
+                </>
+            ) : (
+                <NavDropdown
+                    title={
+                        <span className={styles.NavLink}>
+                            <Avatar
+                                src={currentUser?.profile_image}
+                                text="Profile"
+                                height={40}
+                            />
+                            <span className={styles.Username}>
+                                {currentUser?.username}
+                            </span>
+                        </span>
+                    }
+                    id="profile-dropdown"
+                    className="custom-dropdown"
+                >
+                    <NavDropdown.Item as={NavLink} to={`/profiles/${currentUser?.profile_id}`}>
+                        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
                         Profile
                     </NavDropdown.Item>
-                    <NavDropdown.Item 
-                        as={NavLink}
-                        to={`/trips/create`}
-                    >
-                    <i className="fas fa-plane"></i> Add Trips
+                    <NavDropdown.Item as={NavLink} to={`/trips/create`}>
+                        <i className="fas fa-plane"></i> Add Trips
                     </NavDropdown.Item>
-                    <NavDropdown.Item 
-                        as={NavLink}
-                        to={`/trips/mytrips`}
-                    >
-                    <i className="fa-duotone fa-solid fa-suitcase"></i> My Trips
+                    <NavDropdown.Item as={NavLink} to={`/trips/mytrips`}>
+                        <i className="fas fa-suitcase"></i> My Trips
                     </NavDropdown.Item>
                     <NavDropdown.Item onClick={handleSignOut}>
-                        <i className='fas fa-sign-out-alt'></i> Sign Out
+                        <i className="fas fa-sign-out-alt"></i> Sign Out
                     </NavDropdown.Item>
-            </NavDropdown>
+                </NavDropdown>
+            )};
         </>
     );
+
     const loggedOutIcons = (
         <>
             <NavLink
                 exact to="/signin"
                 className={styles.NavLink}
                 activeClassName={styles.Active}
+                onClick={() => setExpanded(false)}
             >
                 <i className='fas fa-sign-in-alt'></i> Sign in
             </NavLink>
@@ -103,6 +150,7 @@ const NavBar = () => {
                 exact to="/signup"
                 className={styles.NavLink}
                 activeClassName={styles.Active}
+                onClick={() => setExpanded(false)}
             >
                 <i className='fas fa-user-plus'></i> Sign up
             </NavLink>
@@ -120,11 +168,17 @@ const NavBar = () => {
                 <NavLink to="/" className={styles.NavLink}>
                     <h1>Plan-et Continentally</h1>
                 </NavLink>
-                {currentUser && addPostIcon}
                 <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <NavLink exact to="/" className={styles.NavLink} activeClassName={styles.Active}><i className='fas fa-home'></i> Home</NavLink>
+                        <NavLink
+                            exact to="/"
+                            className={styles.NavLink}
+                            activeClassName={styles.Active}
+                            onClick={() => setExpanded(false)}
+                        >
+                            <i className='fas fa-home'></i> Home
+                        </NavLink>
                         {currentUser ? loggedInIcons : loggedOutIcons}
                     </Nav>
                 </Navbar.Collapse>
