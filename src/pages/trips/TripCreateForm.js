@@ -70,7 +70,7 @@ function TripCreateForm() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Row className="d-flex justify-content-center align-items-center">
+      <Row className="d-flex justify-content-center align-items-center mt-5">
         <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
           <Container
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center align-items-center`}
