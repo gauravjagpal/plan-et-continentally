@@ -29,8 +29,7 @@ function TripPage() {
 
     return (
         <Row className="h-100">
-            <Col className="py-2 p-0 p-lg-2" lg={8}>
-                <p>Popular profiles for mobile</p>
+            <Col className="py-2 p-0 p-lg-2 mx-auto mt-5" lg={8}>
                 <Trip {...trip.results[0]} setTrips={setTrip} tripPage />
             </Col>
         </Row>

@@ -44,7 +44,7 @@ function PostPage() {
 
   return (
     <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2 mx-auto" lg={8}>
+      <Col className="py-2 p-0 p-lg-2 mx-auto mt-5" lg={8}>
         <Post {...post.results[0]} setPosts={setPost} postPage />
         <Container className={appStyles.Content}>
           {currentUser ? (

@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import logo from '../assets/logo.png';
 import styles from '../styles/NavBar.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import Avatar from "./Avatar";
 import axios from 'axios';
@@ -16,7 +16,7 @@ import { useMediaQuery } from 'react-responsive';
 const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
-
+    const history = useHistory();
     const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
     const handleSignOut = async () => {
@@ -24,12 +24,13 @@ const NavBar = () => {
             await axios.post('dj-rest-auth/logout/');
             setCurrentUser(null);
             removeTokenTimestamp();
+            history.push('/') //redirect a user to the home page
         } catch (err) {
             console.log(err);
         }
     }
 
-    const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 767px)' }); //Media query to put all nav items into a toggle menu
 
     const loggedInIcons = (
         <>
@@ -38,7 +39,7 @@ const NavBar = () => {
                 to="/posts/create"
                 className={styles.NavLink}
                 activeClassName={styles.Active}
-                onClick={() => setExpanded(false)} // Collapse menu
+                onClick={() => setExpanded(false)}
             >
                 <i className="far fa-plus-square"></i> Add Post
             </NavLink>
@@ -60,7 +61,7 @@ const NavBar = () => {
             >
                 <i className="fas fa-heart"></i> Favourites
             </NavLink>
-            {isMobile ? (
+            {isMobile ? ( //Change how the Navbar elements render for mobile viewing
                 <>
                     <NavLink
                         exact

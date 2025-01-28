@@ -38,7 +38,7 @@ function SignInForm() {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
       setTokenTimestamp(data);
-      history.goBack();
+      history.push('/') //redirect a user to the home page
     } catch (err) {
       setErrors(err.response?.data);
     }
