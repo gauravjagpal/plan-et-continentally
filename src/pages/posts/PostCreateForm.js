@@ -89,12 +89,12 @@ function PostCreateForm() {
     const textFields = (
         <div className="text-center">
             <Form.Group>
-                <Form.Label>Title</Form.Label>
+                <Form.Label>Title*</Form.Label>
                 <Form.Control type="text" name="title" value={title} onChange={handleChange} />
             </Form.Group>
             {errors?.title?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
-                    {message}
+                    Enter a title for your post!
                 </Alert>
             ))}
 
@@ -113,7 +113,7 @@ function PostCreateForm() {
                     {/* Display error messages if there are any related to 'country' */}
                     {errors.country?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>
-                            {message}
+                            Please select a Country
                         </Alert>
                     ))}
                 </Form.Group>
@@ -124,11 +124,6 @@ function PostCreateForm() {
                 <Form.Control as="textarea" name="content" rows={6} value={content} onChange={handleChange}>
 
                 </Form.Control>
-                {errors?.content?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>
-                        {message}
-                    </Alert>
-                ))}
             </Form.Group>
 
             <Button

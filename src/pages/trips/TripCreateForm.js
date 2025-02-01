@@ -78,9 +78,16 @@ function TripCreateForm() {
             {/* Image Upload */}
             <Form.Group className="text-center">
               {tripData.image ? (
-                <figure>
-                  <Image className={appStyles.Image} src={tripData.image} rounded />
-                </figure>
+                <>
+                  <figure>
+                    <Image className={appStyles.Image} src={tripData.image} rounded />
+                  </figure>
+                  <div>
+                    <Form.Label className={`${btnStyles.Button} ${btnStyles.Blue} btn`} htmlFor="image-upload" >
+                      Change the image
+                    </Form.Label>
+                  </div>
+                </>
               ) : (
                 <Form.Label
                   className="d-flex justify-content-center"
@@ -89,17 +96,13 @@ function TripCreateForm() {
                   <Asset src={Upload} message="Click to upload an image" />
                 </Form.Label>
               )}
-              <Form.Control
-                type="file"
-                id="image-upload"
-                accept="image/*"
-                onChange={handleChangeImage}
-                ref={imageInput}
-              />
+
+              <Form.File id="image-upload" accept="image/*" onChange={handleChangeImage} ref={imageInput} />
+
             </Form.Group>
             {errors?.image?.map((message, idx) => (
               <Alert variant="warning" key={idx}>
-                {message}
+                An image must be uploaded
               </Alert>
             ))}
           </Container>
@@ -107,7 +110,7 @@ function TripCreateForm() {
           {/* Trip Fields */}
           <Container className={appStyles.Content}>
             <Form.Group>
-              <Form.Label>Trip to:</Form.Label>
+              <Form.Label>Trip to*</Form.Label>
               <Form.Control
                 type="text"
                 name="trip"
@@ -117,7 +120,7 @@ function TripCreateForm() {
             </Form.Group>
             {errors?.trip?.map((message, idx) => (
               <Alert variant="warning" key={idx}>
-                {message}
+                Where did you go?
               </Alert>
             ))}
 
@@ -139,7 +142,7 @@ function TripCreateForm() {
               </Form.Control>
               {errors?.country?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
-                  {message}
+                  Please select a country
                 </Alert>
               ))}
             </Form.Group>
