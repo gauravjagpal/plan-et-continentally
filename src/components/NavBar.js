@@ -19,6 +19,7 @@ const NavBar = () => {
     const history = useHistory();
     const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
+    // This function will log a user out and re-direct them to the home page
     const handleSignOut = async () => {
         try {
             await axios.post('dj-rest-auth/logout/');
@@ -29,9 +30,34 @@ const NavBar = () => {
             console.log(err);
         }
     }
+    
+    //Media query to put all nav items into a toggle menu
+    const isMobile = useMediaQuery({ query: '(max-width: 767px)' }); 
 
-    const isMobile = useMediaQuery({ query: '(max-width: 767px)' }); //Media query to put all nav items into a toggle menu
-
+    /* loggedInIcons Component
+    
+     This JSX snippet renders navigation links for logged-in users, including options to create posts,
+     view the feed, view favorites, and access profile-related features.
+    
+     Features:
+     - Uses `NavLink` to navigate between different sections of the app.
+     - Includes icons for visual clarity.
+     - Mobile-specific rendering:
+       - If `isMobile` is true, profile and trip-related links are displayed as separate `NavLink` items.
+       - Otherwise, a dropdown (`NavDropdown`) is used for better desktop organization.
+     - Clicking a link collapses the navigation menu (`setExpanded(false)`).
+     - The Sign Out option triggers `handleSignOut()` before closing the menu (defined above).
+    
+     Props/Dependencies:
+     - `currentUser`: Contains user profile details such as `profile_id`, `profile_image`, and `username`.
+     - `setExpanded`: Function to control the navbar state.
+     - `handleSignOut`: Function to log out the user.
+     - `isMobile`: Boolean flag to determine mobile layout adjustments.
+    
+     Usage:
+     {loggedInIcons} // Renders inside a navigation component
+    */
+   
     const loggedInIcons = (
         <>
             <NavLink
@@ -137,6 +163,8 @@ const NavBar = () => {
         </>
     );
 
+    // Similar to the loggedIn Icons, this will render for the the logged out icons
+    //
     const loggedOutIcons = (
         <>
             <NavLink
@@ -157,6 +185,7 @@ const NavBar = () => {
             </NavLink>
         </>
     );
+
     return (
         <Navbar expanded={expanded} className={styles.NavBar} expand="md" fix="top">
             <Container>

@@ -99,7 +99,7 @@ function PostCreateForm() {
             ))}
 
             <Form.Group>
-                <Form.Label>Country</Form.Label>
+                <Form.Label>Country*</Form.Label>
                 <Form.Group controlId="countrySelect">
                     <Form.Control as="select" name="country" value={country} onChange={handleChange}>
                         <option value="">Select a country</option>

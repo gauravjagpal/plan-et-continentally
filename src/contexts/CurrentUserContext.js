@@ -15,6 +15,8 @@ export const CurrentUserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const history = useHistory();
 
+    // Makes a request to the API
+    // Updates the `setCurrentUser` state with the retrieved user data.
     const handleMount = async () => {
         try {
             const { data } = await axiosRes.get('dj-rest-auth/user/');
@@ -40,7 +42,7 @@ export const CurrentUserProvider = ({ children }) => {
                                 history.push('/signin')
                             }
                             return null;
-                        })
+                        });
                         removeTokenTimestamp();
                         return config                    
                     }

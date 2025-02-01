@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 export const useRedirect = (userAuthStatus) => {
     const history = useHistory();
 
+    // Redirects logged in and logged out users back to the home page
     useEffect(() => {
         const handleMount = async () => {
             try {

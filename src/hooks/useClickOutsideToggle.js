@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState }  from 'react'
 
+// This function is created and designed to hide the nav bar on a mobile view once something is clicked
 const useClickOutsideToggle = () => {
     const [expanded, setExpanded] = useState(false);
     const ref = useRef(null);

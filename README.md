@@ -217,7 +217,7 @@ To fork the repository:
 
 - On the [Heroku Dashboard](https://dashboard.heroku.com) page, click New and then select Create New App from the drop-down menu.
 - When the next page loads insert the App name and Choose a region. Then click 'Create app'
-- In the settings tab click on Reveal Config Vars and add the key Port and the value 8000. The credentials for this app were:
+- In the settings tab click on Reveal Config Vars and add the key Port and the value 3000. The credentials for this app were:
 
 1. Cloudinary URL
 2. Database URL

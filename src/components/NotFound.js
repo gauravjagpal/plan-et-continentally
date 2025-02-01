@@ -3,6 +3,7 @@ import NoResults from "../assets/no-results.png";
 import styles from "../styles/NotFound.module.css";
 import Asset from "./Asset";
 
+//Renders a not found page if entering an invalid page id
 const NotFound = () => {
   return (
     <div className={styles.NotFound}>

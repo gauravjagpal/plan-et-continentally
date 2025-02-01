@@ -123,7 +123,7 @@ function TripCreateForm() {
 
             {/* Country Selector */}
             <Form.Group>
-              <Form.Label>Country</Form.Label>
+              <Form.Label>Country*</Form.Label>
               <Form.Control
                 as="select"
                 name="country"

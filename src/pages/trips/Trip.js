@@ -25,10 +25,12 @@ const Trip = (props) => {
     const is_owner = currentUser?.username === owner
     const history = useHistory();
 
+    // Allows user to edit trip
     const handleEdit = () => {
         history.push(`/trips/${id}/edit`);
     };
-
+    
+    // Allows user to delete a trip
     const handleDelete = async () => {
         try {
             await axiosRes.delete(`/trips/${id}/`);

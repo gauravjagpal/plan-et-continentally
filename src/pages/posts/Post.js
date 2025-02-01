@@ -19,10 +19,12 @@ const Post = (props) => {
     const is_owner = currentUser?.username === owner
     const history = useHistory();
 
+    // Allows a user to edit a post
     const handleEdit = () => {
         history.push(`/posts/${id}/edit`);
     };
 
+    // Allows a user to delete a post
     const handleDelete = async () => {
         try {
             await axiosRes.delete(`/posts/${id}/`);
@@ -32,6 +34,7 @@ const Post = (props) => {
         }
     };
 
+    // Allows a user to favourite a post
     const handleFavourite = async () => {
         try {
             const { data } = await axiosRes.post('/favourites/', { post: id });
@@ -51,9 +54,8 @@ const Post = (props) => {
             console.log(err);
         }
     }
-
-
-
+    
+    // Allows a user to unfavourite a post
     const handleUnfavourite = async () => {
         try {
             await axiosRes.delete(`/favourites/${favourite_id}/`);

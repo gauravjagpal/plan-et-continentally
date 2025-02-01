@@ -10,10 +10,12 @@ function CommentEditForm(props) {
 
   const [formContent, setFormContent] = useState(content);
 
+  // Gives the user the option to change a comment
   const handleChange = (event) => {
     setFormContent(event.target.value);
   };
 
+  // Handles a user clicking the post button when trying to comment
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

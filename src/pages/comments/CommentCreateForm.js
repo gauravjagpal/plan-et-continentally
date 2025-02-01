@@ -17,6 +17,7 @@ function CommentCreateForm(props) {
     setContent(event.target.value);
   };
 
+  // Once a comment is created, this will submit the comment to the post
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

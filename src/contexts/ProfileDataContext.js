@@ -18,6 +18,7 @@ export const ProfileDataProvider = ({ children }) => {
 
   const currentUser = useCurrentUser();
 
+  // Handles what to a profile and the popular profiles when a user follows a page
   const handleFollow = async (clickedProfile) => {
     try {
       const { data } = await axiosRes.post("/followers/", {
@@ -43,6 +44,7 @@ export const ProfileDataProvider = ({ children }) => {
     }
   };
 
+  // Handles what to a profile and the popular profiles when a user unfollows a page
   const handleUnfollow = async (clickedProfile) => {
     try {
       await axiosRes.delete(`/followers/${clickedProfile.following_id}/`);
@@ -66,6 +68,8 @@ export const ProfileDataProvider = ({ children }) => {
     }
   };
 
+  // Uses `axiosReq.get()` to retrieve profile data from the `/profiles/` endpoint.
+  //Updates `profileData` state, specifically the `popularProfiles` field.
   useEffect(() => {
     const handleMount = async () => {
       try {
