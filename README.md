@@ -48,8 +48,8 @@ Link to backend github - [Back End](https://github.com/gauravjagpal/drf-api-proj
 
 ## Site Objectives
 
-Users should be able to create post their trips and engage with other users trips (which will only be for their eyes).
-They can follow their favourite accounts and view posts by them on the feed page, or favourite a post and view all favourited posts on teh favourites page.
+Users should be able to create posts their trips and engage with other users trips (which will only be for their eyes).
+They can follow their favourite accounts and view posts by them on the feed page, or favourite a post and view all favourited posts on the favourites page.
 
 My three main objectives were:
 
@@ -59,11 +59,11 @@ My three main objectives were:
 
 - ### Make use of available backend functionality
 
-  The use of the backend framework allows users to create a profile, leave a review and/or edit any of the books on the site (with authorisation), as well as deleting their own comments should they wish to. CORS were used to achieve this
+  The use of the backend framework allows users to create a profile, leave a review and/or edit any of the books on the site (with authorisation), as well as deleting their own comments should they wish to. CORS was used to achieve this
 
 - ### Store data on an external cloud database
 
-  I used a PostgreSQL database for this project Django frameworks were used to achieve this.
+  I used a PostgreSQL database for this project. The Django framework was used to achieve this.
 
 # User Experience/UX
 
@@ -130,7 +130,7 @@ TribeHub features full Create, Read, Update and Delete functionality, via the UI
 A user should be able to:
 - The user can create an account
 - View Posts on Home Page
-- Leave a comment on Post.
+- Leave a comment on a Post.
 - Follow their favourite users
 - Add a trip - this will be private
 - Edit a trip - this will be private
@@ -141,7 +141,7 @@ A user should be able to:
 - Add a collaboration feature so you can add friends to your trip section
 the idea of this section is for a user to be able to plan their trip with friends
 - Add a way a user can reset their password
-- Add a accomodation options/links/suggestions
+- Add accomodation options/links/suggestions
 
 # Agile
 
@@ -198,7 +198,7 @@ All [Backend Testing](https://github.com/gauravjagpal/drf-api-project5/blob/main
 
 # Deployment
 ## Dev environment
-To run the app in a dev evnironment I would do the following:
+To run the app in a dev environment I would do the following:
 
 ### `nvm install 16 && nvm use 16`
 ### `npm run start`
@@ -211,7 +211,7 @@ You will also see any lint errors in the console.
 
 ## Github Deployment
 
-The website was stored using GitHub for storage of data and version control. To do this I did the following;
+The website was hosted on GitHub for version control and data storage. To do this I did the following;
 
 After each addition, change or removal of code, in the terminal within your IDE (I used Gitpod for this project) type:
 
@@ -227,7 +227,7 @@ To bring all models up to date I regularly needed to run:
 - python3 manage.py makemigrations
 - python3 manage.py migrate
 
-Whenever I made changes to my CSS or JavaScript files I needed to run:
+Whenever I made changes to my CSS or JavaScript files, I needed to run::
 - python3 manage.py collectstatic
 
 ## Cloning and Forking
