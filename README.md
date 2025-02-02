@@ -121,15 +121,15 @@ Here is a diagram showing the possible flow through the site. On the left side y
 ![Site Flow Diagram](documentation/diagrams/flow-diagram.png)
 
 # Features
-## Registration
 
+## User options
 A user should be able to:
 - The user can create an account
 - View Posts on Home Page
 - Leave a comment on Post.
 - Follow their favourite users
-- Add a trip - this will be pivate
-- Edit a trip - this will be pivate
+- Add a trip - this will be private
+- Edit a trip - this will be private
 
 ## Future Features
 - Add a share feature to send posts to friends
@@ -137,7 +137,7 @@ A user should be able to:
 - Add a collaboration feature so you can add friends to your trip section
 the idea of this section is for a user to be able to plan their trip with friends
 - Add a way a user can reset their password
-
+- Add a accomodation options/links/suggestions
 
 # Technologies Used
 
@@ -177,6 +177,8 @@ Please refer to [TESTING.md](TESTING.md) file for all testing carried out.
 | :--- | :--- | :--- |
 | 1 | Navbar dropdown was not working in mobile view. I corrected this by adding a media query and removing it from the dropdown. |
 | 2 | Editing a Country was not working in both the EditTrips and EditPosts. This was to do with how I was referencing them in both the serializers in the back and the country codes in the front end
+| 3 | The trips page was rendering all users trips. The backend needed to be updated to include this in the filter fieldset
+| 4 |Search field was not working. The backend did not have the correct fields included
 
 
 # Deployment
@@ -204,6 +206,8 @@ After each addition, change or removal of code, in the terminal within your IDE 
 
 The files are now available to view within my github repository.
 
+
+#### For the back end 
 To bring all models up to date I regularly needed to run:
 - python3 manage.py makemigrations
 - python3 manage.py migrate

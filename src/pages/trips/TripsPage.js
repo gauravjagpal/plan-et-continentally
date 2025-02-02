@@ -24,23 +24,25 @@ function TripsPage({ message, filter = "" }) {
     const [query, setQuery] = useState("");
 
     useEffect(() => {
-        const fetchTrips = async () => {
-            try {
-                const { data } = await axiosReq.get(`/trips/?${filter}search=${query}`)
-                setTrips(data)
-                setHasLoaded(true)
-            } catch (err) {
-                console.log(err)
-            }
+    const fetchTrips = async () => {
+        try {
+            const queryString = `/trips/?${filter}${query ? `search=${query}` : ''}`;
+            console.log("Fetching trips with query:", queryString); // Debugging log
+            
+            const { data } = await axiosReq.get(queryString);
+            setTrips(data);
+            setHasLoaded(true);
+        } catch (err) {
+            console.error("Error fetching trips:", err);
         }
-        setHasLoaded(false);
-        const timer = setTimeout(() => {
-            fetchTrips();
-        }, 1000)
-        return () => {
-            clearTimeout(timer);
-        }
-    }, [filter, query, pathname, currentUser])
+    };
+
+    setHasLoaded(false);
+    const timer = setTimeout(fetchTrips, 1000);
+
+    return () => clearTimeout(timer);
+}, [filter, query, pathname, currentUser]);
+
 
     return (
         <Row className="h-100">
