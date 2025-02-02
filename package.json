@@ -21,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint"
   },
   "eslintConfig": {
     "extends": [
@@ -42,9 +43,13 @@
     ]
   },
   "devDependencies": {
+    "@eslint/js": "^9.19.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.37.4",
+    "globals": "^15.14.0",
     "msw": "^0.35.0"
   },
   "engines": {
