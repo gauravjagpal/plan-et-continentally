@@ -122,6 +122,10 @@ Here is a diagram showing the possible flow through the site. On the left side y
 
 # Features
 
+
+## CRUD functionality
+TribeHub features full Create, Read, Update and Delete functionality, via the UI implemented in React and the Django Rest Framework API.
+
 ## User options
 A user should be able to:
 - The user can create an account
@@ -138,6 +142,12 @@ A user should be able to:
 the idea of this section is for a user to be able to plan their trip with friends
 - Add a way a user can reset their password
 - Add a accomodation options/links/suggestions
+
+# Agile
+
+This project was designed using Agile methodology, utilising the Project Board and Issues sections in GitHub
+
+- [Project Board](https://github.com/users/gauravjagpal/projects/3)
 
 # Technologies Used
 
@@ -161,25 +171,30 @@ Here are the technologies used to build this project:
 - [JavaScript](https://www.javascript.com/)
 - [React](https://react-bootstrap-v4.netlify.app/)
 
+## Libraries
+### React-Router-DOM
+- [react-router-dom](https://www.npmjs.com/package/react-router-dom) - this library enables 'client side routing' for React web applications, and is used to implement basic routing in TribeHub, i.e. to implement the links on the bottom navbar, and register, sign-in and sign-out links. Using React-Router-DOM also enabled implementation of 'single page mode'to enhance the experience for users on larger screens. The `useSinglePage` custom hook is referenced in `App.js`, with different `Route` components conditionally rendered for the various paths depending on whether the app is running in single page mode. The `useLocation` hook from React-Router-DOM is used in some components to determine the current URL and respond accordingly, for example by ensuring the correct nav button is highlighted in the bottom navbar for mobile users.
 
-# Agile
+### ReactDOM
+- [react-dom](https://reactjs.org/docs/react-dom.html) - react-dom is used to manipulate the DOM outside of a specific component, and supports the user experience by enabling modal dialogs to be appended to the top level of the DOM (important for accessability) and alerts to be appended to specific components. For example, notifications are fetched by the NotificationsMenu component, but this takes the form of a dropdown menu, so using ReactDOM allows the component to 'reach out' into the DOM and display error alerts in a more obvious location than inside the dropdown.
 
-This project was designed using Agile methodology, utilising the Project Board and Issues sections in GitHub
+### Axios
+- [Axios](https://www.npmjs.com/package/axios) - the axios library was chosen to simplify making HTTP requests to the REST API (e.g. not having to manually configure HTTP headers), and because it enables simple implementation of 'interceptors' which are used to request a refresh token in the event of a HTTP 401 error. This enhances the user experience beacuse an authenticated user remains signed in for up to 24 hours, rather than having to sign in again after five minutes.
 
-- [Project Board](https://github.com/users/gauravjagpal/projects/3)
+### JWT Decode
+- [jwt-decode](https://www.npmjs.com/package/jwt-decode) - used to decode Base64URL encoded JSON web tokens.
+
+### React Bootstrap Icons
+- [React Bootstrap Icons](https://www.npmjs.com/package/react-bootstrap-icons) - this icon library was selected for the high quality and simplicity of the icons, and easy integration with React.
+
+## React features used to enhance user experience
+### Custom hooks
+The `useSingle` page custom hook is used throughout the app so that components can check whether the app is currently running in 'single page' mode, and render themselves accordingly, for example by applying appropriate CSS classes for the 'mobile' versus 'single page' views. Many components are reliant on a `useCurrentUser` hook to determine whether the current user is authenticated, and to obtain various details about the user such as profile image, display name and whether they have tribe admin status. 
 
 # Testing
-Please refer to [TESTING.md](TESTING.md) file for all testing carried out. 
+Please refer to [TESTING.md](TESTING.md) file for all testing carried out for the front end. 
 
-### Solved Bugs
-
-| No | Bug | How I solved the issue |
-| :--- | :--- | :--- |
-| 1 | Navbar dropdown was not working in mobile view. I corrected this by adding a media query and removing it from the dropdown. |
-| 2 | Editing a Country was not working in both the EditTrips and EditPosts. This was to do with how I was referencing them in both the serializers in the back and the country codes in the front end
-| 3 | The trips page was rendering all users trips. The backend needed to be updated to include this in the filter fieldset
-| 4 |Search field was not working. The backend did not have the correct fields included
-
+All [Backend Testing](https://github.com/gauravjagpal/drf-api-project5/blob/main/README.md) has been documented here.
 
 # Deployment
 ## Dev environment
@@ -261,7 +276,7 @@ ___
 
 ## Credits
 
-This project was based on the Code Institute's - I think therefore I blog walkthrough module which provided a standard blog 'base'. I used this template and manipulated it into a review site for books, changing view, models and HTML/CSS along the way.
+This project was based on the Code Institute's - moments walkthrough module which provided a standard social media 'base'. I used this template and adapted it to be more related to travel.
 
 When running into blockers I often referred to Stack Overflow for inspiration
 
