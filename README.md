@@ -48,19 +48,20 @@ Link to backend github - [Back End](https://github.com/gauravjagpal/drf-api-proj
 
 ## Site Objectives
 
-Design and create a review site to demonstrate an increasing understanding of the libraries and frameworks available to developers.
+Users should be able to create post their trips and engage with other users trips (which will only be for their eyes).
+They can follow their favourite accounts and view posts by them on the feed page, or favourite a post and view all favourited posts on teh favourites page.
 
 My three main objectives were:
 
 - ### Create a readable, clean and responsive front end 
 
-I wanted to make a site that is easy to access and navigate for the users. React was used to style the front end application
+  I wanted to make a site that is easy to access and navigate for the users. React was used to style the front end application
 
 - ### Make use of available backend functionality
 
   The use of the backend framework allows users to create a profile, leave a review and/or edit any of the books on the site (with authorisation), as well as deleting their own comments should they wish to. CORS were used to achieve this
 
-  - ### Store data on an external cloud database
+- ### Store data on an external cloud database
 
   I used a PostgreSQL database for this project Django frameworks were used to achieve this.
 
@@ -79,21 +80,38 @@ I wanted to make a site that is easy to access and navigate for the users. React
 - Log in and out of their account.
 - Read posts and comments
 - Leave a comment and favourite a post
+- Start planning their own trips
 
 # Design Choices
 ## Colour Scheme
 I have chosen a fairly neutral colour scheme, with the 3 colours being white for a clean look
 and grey and blue for a contrasting and professional finish
+
 ## Typography
 
 The main font used is DM Sans with a backup of sans serif
 
 ## Logo and Favicon
-The logo was chosen as a globe to represent travel
-- Homepage, Feed and favourites Wireframes
+The logo was chosen as a globe to represent travel, this is also the favicon
 
-## Wireframes
+# Wireframes
+## Home page. Feed and Favourites Wireframes
+During the initial build plan, the below was the intended design. After development began, I decided to add the search bar feature.
+
 ![Homepage Wireframes](documentation/wireframes/home-wireframe.png)
+## Add Post Wireframe
+![Add Post Wireframe](documentation/wireframes/addpost-wireframe.png)
+## Profile page Wireframe
+![Profile Page Wireframe](documentation/wireframes/profile-wireframe.png)
+## Add Trip Wireframe
+![Add Trip Wireframe](documentation/wireframes/addtrip-wireframe.png)
+## Trips Wireframe
+![Trips Wireframe](documentation/wireframes/trips-wireframe.png)
+
+## Sign In Page
+![Sign In Wireframe](documentation/wireframes/signin-wireframe.png)
+## Sign In Page
+![Sign Up Wireframe](documentation/wireframes/signup-wireframe.png)
 
 ## Flow Diagram
 
@@ -115,9 +133,10 @@ A user should be able to:
 
 ## Future Features
 - Add a share feature to send posts to friends
-- Add more filters, such as a city
+- Add more filters, such as a continent and city
 - Add a collaboration feature so you can add friends to your trip section
 the idea of this section is for a user to be able to plan their trip with friends
+- Add a way a user can reset their password
 
 
 # Technologies Used
