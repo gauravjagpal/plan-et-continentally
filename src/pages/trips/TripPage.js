@@ -11,6 +11,7 @@ function TripPage() {
     const { id } = useParams();
     const [trip, setTrip] = useState({ results: [] })
 
+    // Function to fetch trip data when component mounts or the id changes
     useEffect(() => {
         const handleMount = async () => {
             try {

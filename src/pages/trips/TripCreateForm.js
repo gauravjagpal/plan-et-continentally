@@ -20,6 +20,7 @@ function TripCreateForm() {
   const imageInput = useRef(null);
   const history = useHistory();
 
+  // Fetch the list of countries from an external API
   useEffect(() => {
     const fetchCountries = async () => {
       try {
@@ -32,6 +33,7 @@ function TripCreateForm() {
     fetchCountries();
   }, []);
 
+   // Handle changes in form inputs (text and select fields)
   const handleChange = (event) => {
     setTripData({
       ...tripData,
@@ -39,6 +41,7 @@ function TripCreateForm() {
     });
   };
 
+  // Handle changes in the image upload input
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(tripData.image);
@@ -49,6 +52,7 @@ function TripCreateForm() {
     }
   };
 
+  // Handle form submission to create a new trip
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();

@@ -51,7 +51,6 @@ const TripEditForm = () => {
   }, [history, id]);
 
   // Fetch countries from API on component mount
-
   useEffect(() => {
 
     const fetchCountries = async () => {
@@ -65,6 +64,7 @@ const TripEditForm = () => {
     fetchCountries();
   }, []);
 
+  // Handle form field changes
   const handleChange = (event) => {
     setTripData({
       ...tripData,
@@ -72,6 +72,7 @@ const TripEditForm = () => {
     });
   };
 
+  // Handle image file changes
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
@@ -82,10 +83,12 @@ const TripEditForm = () => {
     }
   };
 
+   // Handle form submission to update trip data
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
 
+    // Append form data
     formData.append("trip", trip);
     formData.append("activities", activities);
     formData.append("country", country);

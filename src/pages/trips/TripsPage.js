@@ -23,6 +23,7 @@ function TripsPage({ message, filter = "" }) {
     const currentUser = useCurrentUser();
     const [query, setQuery] = useState("");
 
+    // useEffect hook to fetch trips data whenever filter, query, pathname, or currentUser changes
     useEffect(() => {
     const fetchTrips = async () => {
         try {
