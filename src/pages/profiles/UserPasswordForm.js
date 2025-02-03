@@ -19,6 +19,7 @@ const UserPasswordForm = () => {
   const { id } = useParams();
   const currentUser = useCurrentUser();
 
+  // State for form data (password fields) and errors
   const [userData, setUserData] = useState({
     new_password1: "",
     new_password2: "",
@@ -27,6 +28,7 @@ const UserPasswordForm = () => {
 
   const [errors, setErrors] = useState({});
 
+  // Handle form input change
   const handleChange = (event) => {
     setUserData({
       ...userData,
@@ -34,6 +36,7 @@ const UserPasswordForm = () => {
     });
   };
 
+  // useEffect to ensure the user can only update their own password
   useEffect(() => {
     if (currentUser?.profile_id?.toString() !== id) {
       // redirect user if they are not the owner of this profile
@@ -41,6 +44,7 @@ const UserPasswordForm = () => {
     }
   }, [currentUser, history, id]);
 
+  // Handle form submission for password change
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
