@@ -27,6 +27,7 @@ const UsernameForm = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
+  // useEffect to check if the user has access to update their username
   useEffect(() => {
     if (currentUser?.profile_id?.toString() === id) {
       setUsername(currentUser.username);
@@ -35,6 +36,7 @@ const UsernameForm = () => {
     }
   }, [currentUser, history, id]);
 
+  // Handle form submission to update the username
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
