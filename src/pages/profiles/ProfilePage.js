@@ -25,18 +25,23 @@ import NoResults from "../../assets/no-results.png";
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 function ProfilePage() {
+    // State to check if data has loaded and to store profile posts
     const [hasLoaded, setHasLoaded] = useState(false);
     const [profilePosts, setProfilePosts] = useState({ results: [] });
 
+    // Get the current user and profile ID from URL params
     const currentUser = useCurrentUser();
     const { id } = useParams();
 
+    // Access context to set and manage profile data
     const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
     const { pageProfile } = useProfileData();
 
+    // Extract profile data
     const [profile] = pageProfile.results;
     const is_owner = currentUser?.username === profile?.owner;
 
+    // Fetch profile data and posts using useEffect
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -57,6 +62,7 @@ function ProfilePage() {
         fetchData();
     }, [id, setProfileData])
 
+    // JSX for displaying main profile details
     const mainProfile = (
         <>
             {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
@@ -104,6 +110,7 @@ function ProfilePage() {
         </>
     );
 
+    // JSX for displaying profile posts using InfiniteScroll
     const mainProfilePosts = (
         <>
             <hr />
