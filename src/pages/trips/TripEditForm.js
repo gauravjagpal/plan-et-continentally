@@ -139,11 +139,6 @@ const TripEditForm = () => {
         <Form.Label>Activities</Form.Label>
         <Form.Control as="textarea" name="activities" rows={6} value={activities} onChange={handleChange} />
       </Form.Group>
-      {errors?.activities?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
@@ -178,11 +173,6 @@ const TripEditForm = () => {
               <Form.File id="image-upload" accept="image/*" onChange={handleChangeImage} ref={imageInput} />
 
             </Form.Group>
-            {errors?.image?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
 
             <div className="d-md-none">{textFields}</div>
           </Container>
