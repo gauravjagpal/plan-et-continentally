@@ -37,7 +37,10 @@ function PostCreateForm() {
         const fetchCountries = async () => {
             try {
                 const response = await axiosReq.get("https://restcountries.com/v3.1/all");
-                setCountries(response.data);
+                const sortedCountries = response.data.sort((a, b) =>
+                    a.name.common.localeCompare(b.name.common)
+                  );
+                  setCountries(sortedCountries);
             } catch (err) {
                 console.err("Error fetching countries:", err)
                 if (err.response?.status !== 401) {
