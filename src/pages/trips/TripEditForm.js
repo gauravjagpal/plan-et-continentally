@@ -119,7 +119,7 @@ const TripEditForm = () => {
       </Form.Group>
       {errors?.trip?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
-          {message}
+          What was the trip about?
         </Alert>
       ))}
 
