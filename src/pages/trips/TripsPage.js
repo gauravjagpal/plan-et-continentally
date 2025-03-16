@@ -59,7 +59,7 @@ function TripsPage({ message, filter = "" }) {
                 </Form>
                 <Button
                     href="/trips/create"
-                    className={`${btnStyles.Button} ${btnStyles.Blue}`}
+                    className={`${btnStyles.Button} ${btnStyles.Blue} ${btnStyles.buttonWithMargin}`}
                     type="submit">
                     <i className='far fa-plus-square'></i>Add trip
                 </Button>
