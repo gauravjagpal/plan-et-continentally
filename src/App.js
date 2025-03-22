@@ -18,6 +18,7 @@ import TripCreateForm from './pages/trips/TripCreateForm';
 import TripPage from './pages/trips/TripPage';
 import TripsPage from './pages/trips/TripsPage';
 import TripEditForm from './pages/trips/TripEditForm';
+import About from './about/About';
 
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
           <Route
             exact path="/profiles/:id/edit" render={() => <ProfileEditForm />}
           />
+          <Route exact path="/about" render={() => <About />} />
           <Route render={() => <p>Page not found!</p>} />
 
         </Switch>
