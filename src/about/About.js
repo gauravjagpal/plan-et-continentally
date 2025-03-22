@@ -24,7 +24,8 @@ const About = () => {
     <li>Share posts with friends via links.</li>
     <li>Search and filter options by continent and city.</li>
     <li>
-        Collaborative trip planning will be rolled out in future releases:
+        Features coming soon!
+        
         <ul className="pl-4" style={{ listStyleType: "none" }}>
             <li><strong>Phase 1:</strong> Share posts with friends via links.</li>
             <li><strong>Phase 2:</strong> Let friends who have the link collab and edit trips.</li>
