@@ -118,6 +118,15 @@ const NavBar = () => {
                         <i className="fas fa-suitcase"></i> My Trips
                     </NavLink>
                     <NavLink
+                        exact
+                        to="/about"
+                        className={styles.NavLink}
+                        activeClassName={styles.Active}
+                        onClick={() => setExpanded(false)}
+                    >
+                        <i className="fas fa-info-circle"></i> About
+                    </NavLink>
+                    <NavLink
                         to="/"
                         className={styles.NavLink}
                         onClick={() => {
@@ -154,6 +163,9 @@ const NavBar = () => {
                     </NavDropdown.Item>
                     <NavDropdown.Item as={NavLink} to={`/trips/mytrips`}>
                         <i className="fas fa-suitcase"></i> My Trips
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={NavLink} to={`/about`}>
+                        <i className="fas fa-info-circle"></i> About
                     </NavDropdown.Item>
                     <NavDropdown.Item onClick={handleSignOut}>
                         <i className="fas fa-sign-out-alt"></i> Sign Out

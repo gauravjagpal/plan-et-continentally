@@ -18,7 +18,7 @@ import TripCreateForm from './pages/trips/TripCreateForm';
 import TripPage from './pages/trips/TripPage';
 import TripsPage from './pages/trips/TripsPage';
 import TripEditForm from './pages/trips/TripEditForm';
-import About from './about/About';
+import About from './pages/about/About';
 
 
 function App() {
