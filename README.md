@@ -13,7 +13,11 @@ ___
 
 Plan-et Continentally is a site that lets users post pictures of their holidays and get ideas for things to do when planning a trip. A user who has signed up can favourite and comment on posts or follow other accounts who give them inspiration.
 
+An about page has been created for a user to read more about the site to understand the objectives.
+
 Link to live site - [Plan-et Continentally](https://plan-et-continentally-d407d6f9ae7a.herokuapp.com/)
+
+Link to about page - [Plan-et Continentally About page](https://plan-et-continentally-d407d6f9ae7a.herokuapp.com/about)
 
 Link to backend github - [Back End](https://github.com/gauravjagpal/drf-api-project5)
 
@@ -80,7 +84,7 @@ My three main objectives were:
 - Log in and out of their account.
 - Read posts and comments
 - Leave a comment and favourite a post
-- Start planning their own trips
+- Start planning their own trips (this is a private section so that a user can plan their trips having taken ideas from the posts they have viewed. This will become open to people they have invited to their trip in future releases)
 
 # Design Choices
 ## Colour Scheme
@@ -145,7 +149,8 @@ the idea of this section is for a user to be able to plan their trip with friend
 
 # Agile
 
-This project was designed using Agile methodology, utilising the Project Board and Issues sections in GitHub
+This project was designed using Agile methodology, utilising the Project Board and Issues sections in GitHub.
+Through each iteration of feedback received, new story points were added and worked on.
 
 - [Project Board](https://github.com/users/gauravjagpal/projects/3)
 
