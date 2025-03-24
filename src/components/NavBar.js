@@ -30,9 +30,9 @@ const NavBar = () => {
             console.log(err);
         }
     }
-    
+
     //Media query to put all nav items into a toggle menu
-    const isMobile = useMediaQuery({ query: '(max-width: 767px)' }); 
+    const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
     /* loggedInIcons Component
     
@@ -57,7 +57,7 @@ const NavBar = () => {
      Usage:
      {loggedInIcons} // Renders inside a navigation component
     */
-   
+
     const loggedInIcons = (
         <>
             <NavLink
@@ -194,6 +194,14 @@ const NavBar = () => {
                 onClick={() => setExpanded(false)}
             >
                 <i className='fas fa-user-plus'></i> Sign up
+            </NavLink>
+            <NavLink 
+                exact to="/about"
+                className={styles.NavLink}
+                activeClassName={styles.Active}
+                onClick={() => setExpanded(false)}
+            >
+                <i className="fas fa-info-circle"></i> About
             </NavLink>
         </>
     );
